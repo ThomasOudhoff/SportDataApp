@@ -1,0 +1,15 @@
+.navbar {
+    background-color: #84A98C;
+    padding: 7px;
+}
+.navbar ul {
+    display: flex;
+    list-style: none;
+    /*float: right;*/
+}
+.navbar ul li {
+    margin: 0 10px;
+}
+.navbar ul li:hover {
+    text-decoration: underline;
+}
