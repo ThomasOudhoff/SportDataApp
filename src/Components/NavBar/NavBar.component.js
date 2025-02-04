@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./NavBar.component.css";
+import {Link} from "react-router-dom";
 
 const NavBarComponent = () => {
     const [dateTime, setDateTime] = useState("");
@@ -26,10 +27,8 @@ const NavBarComponent = () => {
 
             {/* Rechterzijde: Navigatielinks */}
             <div className="nav-links">
-                <a href="#home">Home</a>
-                <a href="#teams">Teams</a>
-                <a href="#scores">Scores</a>
-                <a href="#login">Login</a>
+                <Link to="/">Home</Link>
+                <Link to="/teams">Teams</Link>
             </div>
         </div>
     );
