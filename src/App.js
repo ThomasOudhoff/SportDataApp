@@ -14,6 +14,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<HomeModule/>} />
                 <Route path="/teams" element={<TeamsModule/>} />
+                <Route path="/teams/:id" element={<TeamsModule/>} />
             </Routes>
         </BrowserRouter>
     </div>
