@@ -1,10 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
-import TeamsModule from "./Modules/Teams/Teams.module";
+import TeamsModule from "./Components/Teams/TeamsList/Teams-list.component.js";
 import NavBarComponent from "./Components/NavBar/NavBar.component";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import HomeModule from "./Modules/Home.module";
-import TeamsDetails from "./Components/TeamsDetails/Teams-details.component.js";
+import HomeModule from "./Components/Home/Home.component.js";
+import TeamsDetails from "./Components/Teams/TeamsDetails/Teams-details.component.js";
 
 
 function App() {

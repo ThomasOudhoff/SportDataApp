@@ -1,10 +1,11 @@
 .navbar {
-    background-color: #84A98C;
+    background-color: var(--green);
     padding: 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    color: #000;
 }
 
 .navbar .datetime {
