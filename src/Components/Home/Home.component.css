@@ -1,0 +1,9 @@
+.widget-leagues {
+    height: 600px;
+    overflow-y: scroll;
+}
+.panel.widget-leagues {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

@@ -1,0 +1,28 @@
+body {
+    background-color: #2F3E46; /* Vervang #FFCC00 door de gewenste kleur */
+
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+}
+.item {
+    flex: 0 0 calc(20% - 10px);  /* 20% breedte minus de ruimte voor de gap */
+    padding: 20px;
+    text-align: center;
+    background-color: #84A98C;
+    color: #2F3E46;
+    min-width: 150px;
+
+    transition: 0.2s ease-in-out transform;
+}
+
+.item:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    box-shadow: 0px 5px 10px 0px #000000;
+}
+

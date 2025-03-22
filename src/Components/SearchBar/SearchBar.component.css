@@ -1,0 +1,16 @@
+.search-button {
+    background-color: var(--dark-grey); /* vervang dit door de gewenste kleur */
+    color: var(--green); /* tekstkleur */
+    border: none; /* verwijder de standaard border */
+    cursor: pointer;
+}
+
+/* Verwijder de standaard blauwe focus-indicator */
+.search-button:focus {
+    outline: none;
+}
+
+/* Optioneel: voeg een subtiel effect toe bij active (klik) */
+.search-button:active {
+    transform: scale(0.98);
+}

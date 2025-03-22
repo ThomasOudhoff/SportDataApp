@@ -1,0 +1,31 @@
+.event-title {
+    font-size: 32px;
+    font-weight: bold;
+}
+.icon {
+    width: 60px;
+}
+.event-subtitle {
+    font-size: 20px;
+    font-style: italic;
+    color: var(--dark-grey);
+}
+.grid-eventhighlight {
+      display: flex;
+      flex-direction: row-reverse;
+      gap: 20px;
+}
+
+.small-picture {
+    width: 60px;
+}
+.small-text {
+    font-size: 0.8em;
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+}

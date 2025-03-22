@@ -1,0 +1,11 @@
+.league_item {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding: 2px 5px;
+}
+
+.league_item:hover {
+    background-color: var(--green);
+    color: var(--dark-grey);
+    cursor: pointer;
+}
