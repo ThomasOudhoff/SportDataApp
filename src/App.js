@@ -4,6 +4,7 @@ import TeamsModule from "./Modules/Teams/Teams.module";
 import NavBarComponent from "./Components/NavBar/NavBar.component";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import HomeModule from "./Modules/Home.module";
+import TeamsDetails from "./Components/TeamsDetails/Teams-details.component.js";
 
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<HomeModule/>} />
                 <Route path="/teams" element={<TeamsModule/>} />
-                <Route path="/teams/:id" element={<TeamsModule/>} />
+                <Route path="/teams/:id" element={<TeamsDetails/>} />
             </Routes>
         </BrowserRouter>
     </div>
