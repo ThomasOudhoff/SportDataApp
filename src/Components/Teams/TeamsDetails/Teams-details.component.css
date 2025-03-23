@@ -1,0 +1,36 @@
+.flexContainerOut {
+    display: flex;
+    gap: 20px;
+}
+
+.leftBlock,
+.rightBlock {
+    flex: 1;
+    background-color: var(--green);
+    padding: 1em;
+}
+
+/* De info div float links met een vaste breedte */
+.info {
+    float: left;
+    width: 200px;      /* Pas deze breedte naar wens aan */
+    margin-right: 20px;
+}
+
+/* De beschrijving staat in een apart p-element en mag de resterende ruimte innemen */
+.desc {
+    font-size: 12px;
+}
+
+/* Zorg dat floats worden opgeruimd zodat de container de hoogte juist berekent */
+.leftBlock::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.additionalInfo {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}

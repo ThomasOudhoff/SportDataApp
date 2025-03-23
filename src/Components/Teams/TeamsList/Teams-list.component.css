@@ -1,5 +1,5 @@
 body {
-    background-color: #2F3E46; /* Vervang #FFCC00 door de gewenste kleur */
+    background-color: var(--dark-grey); /* Vervang #FFCC00 door de gewenste kleur */
 
 }
 .container {
@@ -13,8 +13,8 @@ body {
     flex: 0 0 calc(20% - 10px);  /* 20% breedte minus de ruimte voor de gap */
     padding: 20px;
     text-align: center;
-    background-color: #84A98C;
-    color: #2F3E46;
+    background-color: var(--green);
+    color: var(--dark-grey);
     min-width: 150px;
 
     transition: 0.2s ease-in-out transform;
