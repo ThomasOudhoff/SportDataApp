@@ -1,6 +1,7 @@
 :root {
   --green: #84A98C;
   --dark-grey: #282c34;
+  --dark-green: #52735E;
 }
 html {
   background-color: var(--dark-grey);

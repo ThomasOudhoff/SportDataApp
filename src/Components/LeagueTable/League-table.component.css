@@ -1,0 +1,17 @@
+.league-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+}
+
+.league-table th,
+.league-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+.league-table th {
+    background-color: #f5f5f5;
+}

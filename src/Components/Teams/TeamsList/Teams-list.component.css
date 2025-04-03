@@ -25,4 +25,63 @@ body {
     transform: scale(1.1);
     box-shadow: 0px 5px 10px 0px #000000;
 }
+.eventList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.eventCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--green);
+    color: var(--dark-grey);
+    padding: 15px;
+    border-radius: 8px;
+    border-bottom: 2px solid var(--dark-grey); /* scheidingslijn */
+}
+
+.eventLeft {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.teamRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.teamLogo {
+    width: 40px;
+    height: auto;
+}
+
+.teamName {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.stadium {
+    font-size: 0.8rem;
+    margin-top: 8px;
+    color: #333;
+}
+
+.eventRight {
+    text-align: right;
+}
+
+.eventDate {
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.eventTime {
+    font-size: 0.85rem;
+    color: #222;
+}
 
