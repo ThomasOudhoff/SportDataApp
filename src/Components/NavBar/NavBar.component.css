@@ -34,3 +34,13 @@
 .navbar ul li:hover {
     transform: translateY(-5px);
 }
+.logout-link {
+    color: white;
+    cursor: pointer;
+    margin-left: 15px;
+    text-decoration: underline;
+}
+.logout-link:hover {
+    color: var(--green);
+}
+

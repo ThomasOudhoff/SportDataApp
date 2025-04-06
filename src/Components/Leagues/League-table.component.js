@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './League-table.component.css';
-import UpcomingEvents from '../Events/UpcomingEvents/Upcoming-Events.component';
+import UpcomingEvents from '../Events/UpcomingEvents/Show-Events.component';
 import { useNavigate } from 'react-router-dom';
 
 function LeagueTable({ league }) {

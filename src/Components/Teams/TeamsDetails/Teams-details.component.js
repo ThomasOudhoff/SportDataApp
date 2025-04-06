@@ -1,11 +1,15 @@
-// src/Components/TeamsDetails/Teams-details.component.js
 import React, { useState, useEffect } from 'react';
 import "./Teams-details.component.css";
+import UpcomingEvents from '../../Events/UpcomingEvents/Show-Events.component';
 import { useParams } from "react-router-dom";
+
+
 
 function TeamsDetails() {
     const [team, setTeam] = useState({});
-    const [eventInfo, setEventInfo] = useState([]);
+    const [upcomingEvents, setUpcomingEvents] = useState([]);
+    const [pastEvents, setPastEvents] = useState([]);
+    const [activeTab, setActiveTab] = useState("upcoming");
     const { id } = useParams();
 
     useEffect(() => {
@@ -27,29 +31,29 @@ function TeamsDetails() {
                     twit: teamData.strTwitter,
                     ig: teamData.strInstagram,
                 });
-
-                const eventsResponse = await fetch(`https://www.thesportsdb.com/api/v1/json/3/eventsnext.php?id=${id}`);
-                const eventsData = await eventsResponse.json();
-                if (eventsData.events) {
-                    const filtered = eventsData.events.map(event => ({
-                        id: event.idEvent,
-                        name: event.strEvent,
-                        homeBadge: event.strHomeTeamBadge,
-                        awayBadge: event.strAwayTeamBadge,
-                        date: event.dateEvent,
-                        time: event.strTime,
-                        venue: event.strVenue,
-                        league: event.strLeague,
-                        leagueBadge: event.strLeagueBadge
-                    }));
-                    setEventInfo(filtered);
-                }
             } catch (error) {
-                console.error("Error fetching team or events:", error);
+                console.error("Error fetching team:", error);
+            }
+        };
+
+        const fetchEvents = async () => {
+            try {
+                const [nextRes, lastRes] = await Promise.all([
+                    fetch(`https://www.thesportsdb.com/api/v1/json/3/eventsnext.php?id=${id}`),
+                    fetch(`https://www.thesportsdb.com/api/v1/json/3/eventslast.php?id=${id}`)
+                ]);
+                const nextData = await nextRes.json();
+                const lastData = await lastRes.json();
+
+                setUpcomingEvents(nextData.events || []);
+                setPastEvents(lastData.results || []);
+            } catch (error) {
+                console.error("Error fetching events:", error);
             }
         };
 
         fetchTeam();
+        fetchEvents();
     }, [id]);
 
     if (!team || !team.name) return <p>Loading...</p>;
@@ -64,7 +68,7 @@ function TeamsDetails() {
             <div className="leftBlock">
                 <div className="info">
                     <h2>{team.name}</h2>
-                    <img src={team.logo} alt={team.name} width="100"/>
+                    <img src={team.logo} alt={team.name} width="100" />
                     <p>{team.stadium}</p>
                     <p>{"Capacity: " + team.capStadium}</p>
                 </div>
@@ -72,53 +76,37 @@ function TeamsDetails() {
                 <div className="additionalInfo">
                     <a href={websiteUrl} target="_blank" rel="noopener noreferrer"><i className="fas fa-globe"></i></a>
                     <a href={facebookUrl} target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook"></i></a>
-                    <a href={twitterUrl} target="_blank" rel="noopener noreferrer"><i
-                        className="fab fa-twitter"></i></a>
-                    <a href={instagramUrl} target="_blank" rel="noopener noreferrer"><i
-                        className="fab fa-instagram"></i></a>
+                    <a href={twitterUrl} target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
+                    <a href={instagramUrl} target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
                 </div>
             </div>
 
             <div className="rightBlock">
-                <h5>Aankomende wedstrijden</h5>
-                {eventInfo.length > 0 ? (
-                    <div className="eventList">
-                        {eventInfo.map((event) => {
-                            const [homeTeamName, awayTeamName] = event.name.split(" vs ");
-                            return (
-                                <div>
-                                    <div className="competitionRow">
-                                        <div className="competitionLeft">
-                                            <img src={event.leagueBadge} alt="League badge"
-                                                 className="leagueBadge"/>
-                                            <span>{event.league}</span>
-                                        </div>
-                                        <span className="eventDate me-2">
-                                                {new Date(event.date).toLocaleDateString('nl-NL')}
-                                            </span>
-                                    </div>
-                                    <div key={event.id} className="eventCard">
-                                        <div className="eventLeft">
-                                            <div className="teamRow">
-                                                <img src={event.homeBadge} alt="Home Team Badge" className="teamLogo"/>
-                                                <span className="teamName">{homeTeamName}</span>
-                                            </div>
-                                            <div className="teamRow">
-                                                <img src={event.awayBadge} alt="Away Team Badge" className="teamLogo"/>
-                                                <span className="teamName">{awayTeamName}</span>
-                                            </div>
-                                            <p className="stadium">{event.venue}</p>
-                                        </div>
-                                        <div className="eventRight">
-                                            <p className="eventTime">{event.time.slice(0, 5)}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-                ) : (
-                    <p>No upcoming events found.</p>
+                <div className="tab-selector">
+                    <button
+                        className={activeTab === "upcoming" ? "active" : ""}
+                        onClick={() => setActiveTab("upcoming")}
+                    >
+                        Aankomende wedstrijden
+                    </button>
+                    <button
+                        className={activeTab === "past" ? "active" : ""}
+                        onClick={() => setActiveTab("past")}
+                    >
+                        Afgelopen wedstrijden
+                    </button>
+                </div>
+
+                {activeTab === "upcoming" && (
+                    upcomingEvents.length > 0
+                        ? <UpcomingEvents events={upcomingEvents} />
+                        : <p>Geen aankomende wedstrijden gevonden.</p>
+                )}
+
+                {activeTab === "past" && (
+                    pastEvents.length > 0
+                        ? <UpcomingEvents events={pastEvents} />
+                        : <p>Geen afgelopen wedstrijden gevonden.</p>
                 )}
             </div>
         </div>
@@ -126,4 +114,5 @@ function TeamsDetails() {
 }
 
 export default TeamsDetails;
+
 

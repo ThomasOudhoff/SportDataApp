@@ -1,5 +1,5 @@
 import React from 'react';
-import './Upcoming-Events.component.css';
+import './Show-Events.component.css';
 
 function UpcomingEvents({ events }) {
     if (!events || events.length === 0) {
@@ -31,12 +31,18 @@ function UpcomingEvents({ events }) {
                         <div className="eventCard">
                             <div className="eventLeft">
                                 <div className="teamRow">
-                                    <img src={event.strHomeTeamBadge} alt="Home Team Badge" className="teamLogo" />
+                                    <img src={event.strHomeTeamBadge} alt="Home Team Badge" className="teamLogo"/>
                                     <span className="teamName">{homeTeamName}</span>
+                                    {event.intHomeScore !== null && (
+                                        <span className="teamScore">{event.intHomeScore}</span>
+                                    )}
                                 </div>
                                 <div className="teamRow">
-                                    <img src={event.strAwayTeamBadge} alt="Away Team Badge" className="teamLogo" />
+                                    <img src={event.strAwayTeamBadge} alt="Away Team Badge" className="teamLogo"/>
                                     <span className="teamName">{awayTeamName}</span>
+                                    {event.intAwayScore !== null && (
+                                        <span className="teamScore">{event.intAwayScore}</span>
+                                    )}
                                 </div>
                                 <p className="stadium">{event.strVenue}</p>
                             </div>

@@ -116,3 +116,21 @@
         text-align: right;
     }
 }
+.teamRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.teamName {
+    font-weight: bold;
+    font-size: 0.9rem;
+    flex: 1;
+}
+
+.teamScore {
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-left: auto;
+}
