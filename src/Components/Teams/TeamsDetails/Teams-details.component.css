@@ -78,12 +78,6 @@ body {
     transition: 0.2s ease-in-out transform;
 }
 
-.eventCard:hover {
-    transform: scale(1.01);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-}
-
 /* Linkerkant van kaart: teams + stadion */
 .eventLeft {
     display: flex;
@@ -180,5 +174,26 @@ body {
 
 .eventDate {
     white-space: nowrap; /* Zorgt dat de datum niet wrapt */
+}
+.teamHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.favoriteStar {
+    font-size: 24px;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.favoriteStar:hover {
+    color: var(--green);
+}
+
+.favoriteStar.active {
+    color: gold;
 }
 

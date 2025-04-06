@@ -28,7 +28,7 @@ const NavBarComponent = () => {
             {/* Rechterzijde: Navigatielinks */}
             <div className="nav-links">
                 <Link to="/">Home</Link>
-                <Link to="/teams">Teams</Link>
+                <Link to="/teams">My Teams</Link>
             </div>
         </div>
     );

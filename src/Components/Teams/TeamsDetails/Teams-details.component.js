@@ -6,6 +6,8 @@ function TeamsDetails() {
     const [team, setTeam] = useState({});
     const [eventInfo, setEventInfo] = useState([]);
     const { id } = useParams();
+    const [isFavorite, setIsFavorite] = useState(false);
+
 
     useEffect(() => {
         const fetchTeam = async () => {
@@ -50,6 +52,7 @@ function TeamsDetails() {
             }
         };
 
+
         fetchTeam();
     }, [id]);
 
@@ -67,8 +70,15 @@ function TeamsDetails() {
             {/* Linkerblok met teaminfo */}
             <div className="leftBlock">
                 <div className="info">
-                    <h2>{team.name}</h2>
-                    <img src={team.logo} alt={team.name} width="100" />
+                    <div className="teamHeader">
+                        <h2>{team.name}</h2>
+                        <i
+                            className={`fas fa-star favoriteStar ${isFavorite ? 'active' : ''}`}
+                            onClick={() => setIsFavorite(!isFavorite)}
+                            title={isFavorite ? 'Verwijder uit favorieten' : 'Voeg toe aan favorieten'}
+                        ></i>
+                    </div>
+                    <img src={team.logo} alt={team.name} width="100"/>
                     <p>{team.stadium}</p>
                     <p>{"Capacity: " + team.capStadium}</p>
                 </div>
