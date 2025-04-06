@@ -1,0 +1,118 @@
+/* Container van de eventlijst */
+.eventList {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 10px;
+    scrollbar-width: thin;
+}
+
+.eventList::-webkit-scrollbar {
+    width: 6px;
+}
+
+.eventList::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+/* Competitiekop boven iedere eventCard */
+.competitionRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: var(--dark-green);
+    padding: 6px 12px;
+    font-weight: bold;
+    color: var(--dark-grey);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    margin-bottom: -8px;
+}
+
+.competitionLeft {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Algemene eventkaart stijl */
+.eventCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--green);
+    color: var(--dark-grey);
+    padding: 8px;
+    border-radius: 8px;
+    border-bottom: 2px solid var(--dark-grey);
+    transition: 0.2s ease-in-out transform;
+}
+
+/* Linkerkant met teams en stadion */
+.eventLeft {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.teamRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.teamLogo,
+.leagueBadge {
+    width: 20px;
+    height: auto;
+}
+
+.teamName {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.stadium {
+    font-size: 0.8rem;
+    margin-top: 5px;
+    color: #333;
+}
+
+/* Rechterkant met tijd */
+.eventRight {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 0.85rem;
+}
+
+.eventDate {
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.eventTime {
+    color: #222;
+}
+
+/* Responsive weergave */
+@media (max-width: 768px) {
+    .eventCard {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .eventRight {
+        align-self: flex-end;
+        text-align: right;
+    }
+}

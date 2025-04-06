@@ -10,7 +10,7 @@ const NavBarComponent = () => {
             const now = new Date();
             const options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
             const date = now.toLocaleDateString("nl-NL", options);
-            const time = now.getHours() + ":" + now.getMinutes();
+            const time = now.getHours() + ":" + (now.getMinutes().toString().padStart(2, "0"));
             setDateTime(`${date} - ${time}`);
         };
 
@@ -29,6 +29,7 @@ const NavBarComponent = () => {
             <div className="nav-links">
                 <Link to="/">Home</Link>
                 <Link to="/teams">My Teams</Link>
+                <Link to="/auth/login">Login</Link>
             </div>
         </div>
     );

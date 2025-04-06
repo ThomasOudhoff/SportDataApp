@@ -3,11 +3,13 @@ import "./Home.component.css";
 import LeaguesList from "../Leagues/Leagues-list.component";
 import EventHighlight from "../Events/EventDetails/Event-highlight.component";
 import SearchBar from '../SearchBar/SearchBar.component';
-import LeagueTable from '../LeagueTable/League-table.component.js';
+import LeagueTable from '../Leagues/League-table.component.js';
 
 function HomeComponent() {
     const [leagues, setLeagues] = useState([]);
     const [selectedLeague, setSelectedLeague] = useState(null);
+
+    const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
         const fetchLeagues = async () => {
@@ -23,24 +25,30 @@ function HomeComponent() {
 
     const handleSearch = (query) => {
         console.log("Zoekopdracht:", query);
+        setSearchQuery(query);
     };
-
     return (
-        <div className="grid">
-            <div className="panel">
-                {selectedLeague && <LeagueTable league={selectedLeague} />}
+        <div className="pageLayout">
+            <div className="leftPanel">
+                <div className="scrollableContent">
+                    {selectedLeague && <LeagueTable league={selectedLeague} />}
+                </div>
             </div>
-            <div className="panel widget-leagues">
+
+            <div className="rightPanel">
                 <h2>Competities</h2>
                 <SearchBar onSearch={handleSearch} />
-                <LeaguesList
-                    leagues={leagues}
-                    selectedLeague={selectedLeague}
-                    onSelectLeague={setSelectedLeague}
-                />
+                <div className="scrollableContent">
+                    <LeaguesList
+                        searchQuery={searchQuery}
+                        selectedLeague={selectedLeague}
+                        onSelectLeague={setSelectedLeague}
+                    />
+                </div>
             </div>
         </div>
     );
+
 }
 
 export default HomeComponent;

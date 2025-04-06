@@ -15,7 +15,8 @@ function TeamsList() {
             try {
                 const response = await fetch('https://www.thesportsdb.com/api/v1/json/3/search_all_teams.php?l=' + leagueId);
                 const data = await response.json();
-                setTeams(data.teams.map(team => ({
+
+                setTeams(data.teams?.map(team => ({
                     name: team.strTeam,
                     logo: team.strBadge,
                     id: team.idTeam,
@@ -42,7 +43,7 @@ function TeamsList() {
     };
     return (
         <div className="container">
-            {teams.map((team) => (
+            {teams?.map((team) => (
                 <div className="item" key={team.id}>
                     <div className="teamInfo" onClick={() => navigateTeam(team.id)}>
                         <h2 className="teamName">{team.name}</h2>

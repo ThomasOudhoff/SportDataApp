@@ -1,9 +1,33 @@
-.widget-leagues {
-    height: 600px;
-    overflow-y: scroll;
+.pageLayout {
+    display: flex;
+    height: 100vh;               /* Volledige schermhoogte */
+    padding: 20px;
+    box-sizing: border-box;
+    gap: 20px;
 }
-.panel.widget-leagues {
+
+.leftPanel {
+    flex: 2;
+    background-color: var(--green);
+    padding: 1em;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    overflow: hidden;
+}
+
+.rightPanel {
+    flex: 1;
+    background-color: var(--green);
+    padding: 1em;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Inhoud binnenin scrollbaar maken */
+.scrollableContent {
+    flex: 1;
+    overflow-y: auto;
 }

@@ -1,0 +1,118 @@
+.league-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    background-color: var(--dark-grey);
+    border-radius: 8px;
+    overflow: hidden;
+    color: var(--green);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.league-table th {
+    background-color: var(--dark-green);
+    color: var(--dark-grey);
+    padding: 12px 16px;
+    text-align: left;
+}
+
+.league-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: left;
+}
+
+.league-table tbody tr:nth-child(even) {
+    background-color: rgba(132, 169, 140, 0.15);
+}
+
+.team-logo {
+    width: 20px;
+    height: auto;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* Seizoenselectie + knop wrapper */
+.season-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 10px;
+}
+
+/* Alleen de dropdown */
+.season-selector select {
+    padding: 6px 10px;
+    border: 1px solid var(--green);
+    border-radius: 4px;
+    background-color: var(--dark-green);
+    color: var(--dark-grey);
+    font-size: 0.9rem;
+    height: 36px;
+}
+
+/* Bekijk alle teams knop */
+.view-teams-button {
+    background-color: var(--dark-green);
+    color: var(--dark-grey);
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    height: 36px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.view-teams-button:hover {
+    background-color: var(--green);
+}
+
+/* Tabs bovenin */
+.tab-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.tab-selector button {
+    background-color: var(--dark-grey);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.tab-selector button.active {
+    background-color: var(--green);
+    color: var(--dark-grey);
+    font-weight: bold;
+}
+
+/* Lege stand */
+.league-table-empty {
+    font-style: italic;
+    color: var(--green);
+    margin-top: 1rem;
+}
+
+/* Lijst van wedstrijden */
+.event-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.event-list li {
+    background-color: var(--dark-green);
+    padding: 8px;
+    margin-bottom: 6px;
+    border-radius: 4px;
+    color: white;
+}
+

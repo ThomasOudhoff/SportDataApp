@@ -1,32 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import "./Leagues-list.component.css";
-import { useNavigate } from 'react-router-dom';
+import './Leagues-list.component.css';
 
-function TeamsList() {
+function LeaguesList({ searchQuery, selectedLeague, onSelectLeague }) {
     const [leagues, setLeagues] = useState([]);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchLeagues = async () => {
             try {
                 const response = await fetch('https://www.thesportsdb.com/api/v1/json/3/all_leagues.php?s=Soccer');
                 const data = await response.json();
-
-
-                setLeagues(data.leagues.filter(league => league.strSport === 'Soccer'));
+                const soccerLeagues = data.leagues.filter(league => league.strSport === 'Soccer');
+                setLeagues(soccerLeagues);
             } catch (error) {
-                console.error("Error fetching teams:", error);
+                console.error("Error fetching leagues:", error);
             }
         };
+
         fetchLeagues();
     }, []);
-    const navigateLeague = (leagueId) => {
-        navigate(`/teams?leagueId=${leagueId}`);
-    }
+
+    const filteredLeagues = leagues.filter(league =>
+        league.strLeague.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     return (
-        <div className='league_wrapper'>
-            {leagues.map((league, index) => (
-                <div onClick={()=> navigateLeague(league.strLeague)} className="league_item" key={index}>
+        <div className="league_wrapper">
+            {filteredLeagues.map((league) => (
+                <div
+                    key={league.idLeague}
+                    className={`league_item ${selectedLeague?.idLeague === league.idLeague ? 'active' : ''}`}
+                    onClick={() => onSelectLeague(league)}
+                >
                     {league.strLeague}
                 </div>
             ))}
@@ -34,4 +38,4 @@ function TeamsList() {
     );
 }
 
-export default TeamsList;
+export default LeaguesList;
