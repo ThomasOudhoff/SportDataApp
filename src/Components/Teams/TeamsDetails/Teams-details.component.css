@@ -36,13 +36,14 @@ body {
     display: block;
     clear: both;
 }
-
-/* Socials */
 .additionalInfo {
-    margin-top: 20px;
     display: flex;
-    gap: 10px;
+    justify-content: center;   /* ⬅ midden op de horizontale as */
+    gap: 15px;
+    margin-top: auto;          /* duwt het naar onderen binnen de flexbox */
+    padding-top: 20px;
 }
+
 
 /* Lijst van events */
 .eventList {
@@ -52,6 +53,7 @@ body {
     margin-top: 20px;
     max-height: 400px;      /* ↔ ongeveer 3 wedstrijden */
     overflow-y: auto;
+    overflow-x: hidden;
     padding-right: 10px;    /* ruimte voor scrollbar */
     scrollbar-width: thin;
 }
@@ -181,19 +183,3 @@ body {
     justify-content: space-between;
     gap: 10px;
 }
-
-.favoriteStar {
-    font-size: 24px;
-    color: #aaa;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.favoriteStar:hover {
-    color: var(--green);
-}
-
-.favoriteStar.active {
-    color: gold;
-}
-

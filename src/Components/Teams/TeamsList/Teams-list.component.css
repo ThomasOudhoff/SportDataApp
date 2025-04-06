@@ -1,30 +1,66 @@
+/* Algemene achtergrondkleur */
 body {
-    background-color: var(--dark-grey); /* Vervang #FFCC00 door de gewenste kleur */
-
+    background-color: var(--dark-grey);
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
+
+/* Container met teams */
 .container {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     width: 100%;
     justify-content: center;
-}
-.item {
-    flex: 0 0 calc(20% - 10px);  /* 20% breedte minus de ruimte voor de gap */
     padding: 20px;
-    text-align: center;
+}
+
+/* Teamblok (kaart) */
+.item {
+    position: relative;
+    flex: 0 0 calc(20% - 10px);  /* 5 kaarten per rij met gap */
+    min-width: 150px;
     background-color: var(--green);
     color: var(--dark-grey);
-    min-width: 150px;
-
-    transition: 0.2s ease-in-out transform;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    transition: 0.2s ease-in-out transform, box-shadow 0.2s ease-in-out;
 }
 
 .item:hover {
-    cursor: pointer;
-    transform: scale(1.1);
-    box-shadow: 0px 5px 10px 0px #000000;
+    transform: scale(1.05);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
 }
+
+/* Inhoud in de kaart */
+.teamInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Favorietenster (rechtsboven) */
+.favoriteStar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.favoriteStar:hover {
+    color: var(--dark-grey);
+}
+
+.favoriteStar.active {
+    color: gold;
+}
+
+/* Eventlijst (wedstrijden) */
 .eventList {
     display: flex;
     flex-direction: column;
@@ -32,6 +68,7 @@ body {
     margin-top: 20px;
 }
 
+/* Individuele wedstrijdkaart */
 .eventCard {
     display: flex;
     justify-content: space-between;
@@ -40,37 +77,43 @@ body {
     color: var(--dark-grey);
     padding: 15px;
     border-radius: 8px;
-    border-bottom: 2px solid var(--dark-grey); /* scheidingslijn */
+    border-bottom: 2px solid var(--dark-grey);
 }
 
+/* Linkerhelft van de wedstrijdkaart */
 .eventLeft {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
+/* Teams in de wedstrijdkaart */
 .teamRow {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
+/* Teamlogo */
 .teamLogo {
     width: 40px;
     height: auto;
 }
 
+/* Teamnaam */
 .teamName {
     font-weight: bold;
     font-size: 0.9rem;
 }
 
+/* Stadiontekst */
 .stadium {
     font-size: 0.8rem;
     margin-top: 8px;
     color: #333;
 }
 
+/* Rechterzijde van de wedstrijdkaart */
 .eventRight {
     text-align: right;
 }
@@ -83,5 +126,24 @@ body {
 .eventTime {
     font-size: 0.85rem;
     color: #222;
+}
+
+/* Responsive gedrag */
+@media (max-width: 1024px) {
+    .item {
+        flex: 0 0 calc(33.33% - 10px); /* 3 per rij */
+    }
+}
+
+@media (max-width: 768px) {
+    .item {
+        flex: 0 0 calc(50% - 10px); /* 2 per rij */
+    }
+}
+
+@media (max-width: 480px) {
+    .item {
+        flex: 0 0 100%; /* 1 per rij op mobiel */
+    }
 }
 
