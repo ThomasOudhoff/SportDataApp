@@ -8,6 +8,7 @@ import Footer from "./Components/Footer/Footer.component";
 import Login from './Components/Auth/Login/Login.component.js';
 import { ProtectedRoute } from './Components/Auth/Guard/ProtectedRoute.guard.js';
 import TeamsList from "./Components/Teams/TeamsList/Teams-list.component.js";
+import RegisterComponent from "./Components/Auth/Register/Register.component";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             </ProtectedRoute>
           } />
           <Route path="/auth/login" element={<Login />} />
+          <Route path="/auth/register" element={<RegisterComponent />} />
         </Routes>
         <Footer />
       </BrowserRouter>

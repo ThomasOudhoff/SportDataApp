@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Login.component.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -56,14 +56,21 @@ const Login = () => {
                 </div>
                 <div>
                     <label htmlFor="username">Username:</label>
-                    <input type="username" id="username" name="username" required />
+                    <input type="username" id="username" name="username" required/>
                 </div>
                 <div>
                     <label htmlFor="password">Password:</label>
-                    <input type="password" id="password" name="password" required />
+                    <input type="password" id="password" name="password" required/>
                 </div>
                 <button type="submit">Login</button>
             </form>
+            <div className="register-link">
+                <p>Nog geen account?</p>
+                <button type="button" onClick={() => window.location.href = '/auth/register'}>
+                    Registreren
+                </button>
+            </div>
+
         </div>
     );
 };
