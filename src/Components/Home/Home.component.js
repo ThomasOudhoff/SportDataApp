@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./Home.component.css";
 import LeaguesList from "../Leagues/Leagues-list.component";
-import EventHighlight from "../Events/EventDetails/Event-highlight.component";
 import SearchBar from '../SearchBar/SearchBar.component';
 import LeagueTable from '../Leagues/League-table.component.js';
 
