@@ -1,0 +1,94 @@
+.favorites-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* 🔁 Wisselende achtergrondkleuren *
+
+/* ✅ Algemene rij */
+.team-row {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* 🔙 Links: logo + naam */
+.team-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-grow: 1;
+}
+
+.team-logo {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.team-name {
+    font-weight: bold;
+    font-size: 0.95rem;
+    color: var(--dark-grey);
+    text-decoration: none;
+}
+
+.team-name:hover {
+    text-decoration: underline;
+    color: var(--green);
+}
+
+/* 📊 Resultaten */
+.form {
+    display: flex;
+    gap: 4px;
+}
+
+.form-block {
+    width: 22px;
+    height: 22px;
+    text-align: center;
+    line-height: 22px;
+    font-size: 13px;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+}
+
+.form-block.W { background-color: green; }
+.form-block.G { background-color: orange; }
+.form-block.V { background-color: red; }
+.form-block.N { background-color: gray; }
+
+/* ⭐ Ster rechts */
+.favorite-star {
+    font-size: 1rem;
+    color: gold;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    margin-left: 12px;
+}
+
+.favorite-star:hover {
+    color: darkorange;
+}/*
+.favorites-wrapper .team-row:nth-child(odd) {
+    background-color: hotpink !important;
+}
+
+.favorites-wrapper .team-row:nth-child(even) {
+    background-color: lightgreen !important;
+}*/
+.favorites-wrapper .team-row:nth-child(even) {
+    background-color: rgba(132, 169, 140, 0.15)!important;
+}
+
+.favorites-wrapper .team-row:nth-child(odd) {
+    background-color: rgba(132, 169, 140, 0.3)!important;
+}
+
+
+

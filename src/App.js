@@ -1,5 +1,4 @@
 import './App.css';
-import TeamsModule from "./Components/Teams/TeamsList/Teams-list.component.js";
 import NavBarComponent from "./Components/NavBar/NavBar.component";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomeModule from "./Components/Home/Home.component.js";
@@ -9,6 +8,7 @@ import Login from './Components/Auth/Login/Login.component.js';
 import { ProtectedRoute } from './Components/Auth/Guard/ProtectedRoute.guard.js';
 import TeamsList from "./Components/Teams/TeamsList/Teams-list.component.js";
 import RegisterComponent from "./Components/Auth/Register/Register.component";
+import FavoriteTeams from './Components/Teams/FavoriteTeams/Favorite-Teams.component';
 
 
 function App() {
@@ -34,6 +34,7 @@ function App() {
           } />
           <Route path="/auth/login" element={<Login />} />
           <Route path="/auth/register" element={<RegisterComponent />} />
+          <Route path="/favorites" element={<FavoriteTeams />} />
         </Routes>
         <Footer />
       </BrowserRouter>

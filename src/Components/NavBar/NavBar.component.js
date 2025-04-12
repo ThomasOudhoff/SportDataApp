@@ -35,7 +35,7 @@ const NavBarComponent = () => {
             {/* Rechterzijde: Navigatielinks */}
             <div className="nav-links">
                 <Link to="/">Home</Link>
-                <Link to="/teams">My Teams</Link>
+                <Link to="/favorites">My Teams</Link>
                 {!isAuthenticated ? (
                     <Link to="/auth/login">Login</Link>
                 ) : (
