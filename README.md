@@ -2,9 +2,9 @@
 
 Volg jouw favoriete voetbalteams — altijd en overal. Deze React-applicatie maakt gebruik van [TheSportsDB API](https://www.thesportsdb.com) om live data op te halen zoals teaminformatie, wedstrijden en standen.
 
-![Homepagina](./src/Screenshots/Home/Screenshot Frondend.png)
-![TeamsDetails](./src/Screenshots/TeamsDetails/Screenshot Frondend(3).png)
-![TeamsList](./src/Screenshots/TeamsList/Screenshot Frondend(2).png)
+![Homepagina](./src/Screenshots/Home/ScreenshotFrondend.png)
+![TeamsDetails](./src/Screenshots/TeamsDetails/ScreenshotFrondend(3).png)
+![TeamsList](./src/Screenshots/TeamsList/ScreenshotFrondend(2).png)
 
 ---
 
