@@ -7,9 +7,10 @@ const Register = () => {
 
     const handleRegister = async (e) => {
         e.preventDefault();
+        console.log(e);
         const username = e.target.username.value;
         const password = e.target.password.value;
-        const info = e.target.info.value;
+        const info = "testinfo"
         const email = e.target.email.value;
         const confirmEmail = e.target.confirmEmail.value;
 
@@ -17,13 +18,12 @@ const Register = () => {
             setError("E-mailadressen komen niet overeen.");
             return;
         }
-
-
         try {
             const response = await fetch('https://api.datavortex.nl/sportdataapp/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'X-Api-Key': 'sportdataapp:2gCMFn7OsqAAY15nbACY'
                 },
                 body: JSON.stringify({
                     username,
@@ -37,8 +37,14 @@ const Register = () => {
                 console.log("Registratie geslaagd!");
                 navigate("/auth/login"); // Redirect naar login pagina
             } else {
-                setError("Registratie mislukt. Probeer het opnieuw.");
+                if (response.status == 409) {
+                    setError("E-mail of gebruiksnaam is al in gebruik")
+                }
+                else {
+                    setError("Registratie mislukt. Probeer het opnieuw.");
+                }
             }
+
         } catch (err) {
             console.error("Error tijdens registratie:", err);
             setError("Er ging iets mis. Probeer later opnieuw.");

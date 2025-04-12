@@ -74,14 +74,14 @@
 
 .favorite-star:hover {
     color: darkorange;
-}/*
+}
 .favorites-wrapper .team-row:nth-child(odd) {
     background-color: hotpink !important;
 }
 
 .favorites-wrapper .team-row:nth-child(even) {
     background-color: lightgreen !important;
-}*/
+}
 .favorites-wrapper .team-row:nth-child(even) {
     background-color: rgba(132, 169, 140, 0.15)!important;
 }
