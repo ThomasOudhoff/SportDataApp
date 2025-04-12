@@ -44,10 +44,10 @@ De app draait nu op `http://localhost:3000`.
 
 ## 👥 Testgebruikers
 
-| Gebruikersnaam | Wachtwoord |
-|----------------|------------|
-| `demo1`        | `test123`  |
-| `fan2024`      | `voetbal!` |
+| Gebruikersnaam  | Wachtwoord |
+|-----------------|------------|
+| `gebruiker2025` | `test1234` |
+| `fan2025`       | `voetbal!` |
 
 Deze gebruikers kun je gebruiken om de applicatie te testen.
 
