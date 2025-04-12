@@ -1,45 +1,103 @@
-# ⚽ Sportdata App
+# ⚽ SportData App
 
-De **Sportdata App** is een interactieve webapplicatie gebouwd met React waarmee je live voetbalcompetities, teaminformatie, standen en recente resultaten kunt bekijken. Gebruikers kunnen eenvoudig hun favoriete teams opslaan en deze in een eigen overzicht volgen.
+Volg jouw favoriete voetbalteams — altijd en overal. Deze React-applicatie maakt gebruik van [TheSportsDB API](https://www.thesportsdb.com) om live data op te halen zoals teaminformatie, wedstrijden en standen.
 
-Deze applicatie is ontwikkeld als onderdeel van een software development opleiding en maakt gebruik van de openbare sport-API van [TheSportsDB](https://www.thesportsdb.com/).
-
----
-
-## 📌 Samenvatting
-
-- 👀 Overzicht van competities wereldwijd
-- 📊 Live standen per competitie
-- ⭐ Opslaan van favoriete teams
-- 🔁 Live resultaten per team (W/V/G)
-- 🔍 Zoeken naar competities
-- ✅ Responsive en gebruiksvriendelijk
+![Homepagina](./src/Screenshots/Home/Screenshot Frondend.png)
+![TeamsDetails](./src/Screenshots/TeamsDetails/Screenshot Frondend(3).png)
+![TeamsList](./src/Screenshots/TeamsList/Screenshot Frondend(2).png)
 
 ---
 
-## ✨ Features
+## 📦 Benodigdheden
 
-| Feature                | Beschrijving                                                 |
-|------------------------|--------------------------------------------------------------|
-| 📋 Competitielijst     | Toont alle beschikbare voetbalcompetities                   |
-| 📊 League Table        | Laat actuele stand per competitie zien                      |
-| ⭐ Favorieten           | Voeg teams toe aan je favorieten, opgeslagen in localStorage |
-| 📅 Teamresultaten      | Toon W/V/G van laatste 5 wedstrijden                        |
-| 🔎 Zoekfunctie         | Zoek op naam binnen de competitie lijst                     |
-| 🧭 Navigatie           | Gebruiksvriendelijke router-navigatie via React Router       |
-
----
-
-## 🧱 Systeemvereisten
-
-- Node.js (v16 of hoger aanbevolen)
-- NPM (of Yarn)
+- Node.js (v16 of hoger)
+- NPM of Yarn
+- IDE zoals WebStorm of VS Code
 
 ---
 
 ## 🚀 Installatie
 
-1. **Clone de repository**
-```bash
-git clone https://github.com/ThomasOudhoff/sportdata-app.git
-cd sportdata-app
+1. **Kloon de repository**
+   ```bash
+   git clone https://github.com/jouw-gebruikersnaam/sport-data-app.git
+   ```
+
+2. **Ga naar de map**
+   ```bash
+   cd sport-data-app
+   ```
+
+3. **Installeer de dependencies**
+   ```bash
+   npm install
+   ```
+
+4. **Start de applicatie**
+   ```bash
+   npm start
+   ```
+
+De app draait nu op `http://localhost:3000`.
+
+---
+
+## 👥 Testgebruikers
+
+| Gebruikersnaam | Wachtwoord |
+|----------------|------------|
+| `demo1`        | `test123`  |
+| `fan2024`      | `voetbal!` |
+
+Deze gebruikers kun je gebruiken om de applicatie te testen.
+
+---
+
+## 🧩 Gebruikte technologieën
+
+- React (met `useState`, `useEffect`, routing via React Router)
+- TheSportsDB API
+- Custom styling met CSS
+- LocalStorage voor favorieten
+- JWT-authenticatie
+
+---
+
+## 💡 Overige scripts
+
+| Commando         | Omschrijving                       |
+|------------------|------------------------------------|
+| `npm run build`  | Bouw een productieversie van de app |
+| `npm run lint`   | Voer een linter uit (indien ingesteld) |
+| `npm test`       | Voer eventuele tests uit           |
+
+---
+
+## 📂 Structuur
+
+```
+src/
+├── Components/
+│   ├── Auth/
+│   ├── Events/
+│   ├── Footer/
+│   ├── Home/
+│   ├── Leagues/
+│   ├── NavBar/
+│   ├── SearchBar/
+│   ├── Teams/
+├── App.js
+├── index.js
+```
+
+---
+
+## 📝 Opmerkingen
+
+- Zorg dat je API-sleutels zoals `X-Api-Key` **niet commit** naar GitHub.
+- Favoriete teams worden opgeslagen in `localStorage`.
+- Alleen de My Teams-pagina is beveiligd met JWT.
+
+---
+
+> Gemaakt als **Eindopdracht Frontend** Novi Hogeschool.
