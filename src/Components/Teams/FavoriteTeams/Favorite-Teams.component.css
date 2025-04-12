@@ -1,51 +1,46 @@
 .favorites-wrapper {
-    display: flex;
+    display: flex; /* Lijst met teams onder elkaar */
     flex-direction: column;
     width: 100%;
-    background-color: var(--dark-grey);
+    background-color: var(--dark-grey); /* Achtergrond van de favorietenlijst */
 }
 
-/* 🔁 Wisselende achtergrondkleuren *
-
-/* ✅ Algemene rij */
 .team-row {
-    display: flex;
+    display: flex; /* Inhoud op één regel: logo, naam, form, ster */
     align-items: center;
-    padding: 12px 16px;
-    gap: 12px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 12px 16px; /* Binnenruimte in de rij */
+    gap: 12px; /* Ruimte tussen elementen */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Lichte scheiding tussen rijen */
 }
 
-/* 🔙 Links: logo + naam */
 .team-left {
-    display: flex;
+    display: flex; /* Logo en naam naast elkaar */
     align-items: center;
     gap: 10px;
-    flex-grow: 1;
+    flex-grow: 1; /* Neemt beschikbare ruimte in */
 }
 
 .team-logo {
-    width: 28px;
+    width: 28px; /* Formaat van het teamlogo */
     height: 28px;
-    object-fit: contain;
+    object-fit: contain; /* Houd verhoudingen bij het schalen */
 }
 
 .team-name {
     font-weight: bold;
     font-size: 0.95rem;
-    color: var(--green);
+    color: var(--green); /* Groene linkkleur */
     text-decoration: none;
 }
 
 .team-name:hover {
-    text-decoration: underline;
+    text-decoration: underline; /* Onderstreping bij hover */
     color: var(--green);
 }
 
-/* 📊 Resultaten */
 .form {
-    display: flex;
-    gap: 4px;
+    display: flex; /* Resultaatblokjes naast elkaar */
+    gap: 4px; /* Ruimte tussen blokjes */
 }
 
 .form-block {
@@ -55,31 +50,30 @@
     line-height: 22px;
     font-size: 13px;
     border-radius: 4px;
-    color: white;
+    color: white; /* Witte tekst */
     font-weight: bold;
 }
 
-.form-block.W { background-color: green; }
-.form-block.G { background-color: orange; }
-.form-block.V { background-color: red; }
-.form-block.N { background-color: gray; }
+.form-block.W { background-color: green; }  /* Winst */
+.form-block.G { background-color: orange; } /* Gelijkspel */
+.form-block.V { background-color: red; }    /* Verlies */
+.form-block.N { background-color: gray; }   /* Geen score bekend */
 
-/* ⭐ Ster rechts */
 .favorite-star {
     font-size: 1rem;
-    color: gold;
+    color: gold; /* Gele ster */
     cursor: pointer;
-    transition: color 0.2s ease;
-    margin-left: 12px;
+    transition: color 0.2s ease; /* Soepele kleurverandering */
+    margin-left: 12px; /* Ruimte tussen ster en form */
 }
 
 .favorite-star:hover {
-    color: darkorange;
-}
-.favorites-wrapper .team-row:nth-child(even) {
-    background-color: rgba(132, 169, 140, 0.15);
+    color: darkorange; /* Donkerdere kleur bij hover */
 }
 
+.favorites-wrapper .team-row:nth-child(even) {
+    background-color: rgba(132, 169, 140, 0.15); /* Lichtgroene achtergrond voor afwisseling */
+}
 
 
 

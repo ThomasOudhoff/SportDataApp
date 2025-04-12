@@ -1,86 +1,83 @@
 .league-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-    font-size: 0.95rem;
-    background-color: var(--dark-grey);
-    border-radius: 8px;
-    overflow: hidden;
-    color: var(--green);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    width: 100%; /* Volledige breedte van container */
+    border-collapse: collapse; /* Verwijdert dubbele randen tussen cellen */
+    margin-top: 1rem; /* Ruimte boven de tabel */
+    font-size: 0.95rem; /* Iets kleinere tekst */
+    background-color: var(--dark-grey); /* Donkergrijze achtergrond */
+    border-radius: 8px; /* Afgeronde hoeken */
+    overflow: hidden; /* Verberg overflow bij afgeronde hoeken */
+    color: var(--green); /* Groene tekstkleur */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtiele schaduw */
 }
 
 .league-table th {
-    background-color: var(--dark-green);
-    color: var(--dark-grey);
-    padding: 12px 16px;
-    text-align: left;
+    background-color: var(--dark-green); /* Donkergroene kopregel */
+    color: var(--dark-grey); /* Tekstkleur in kop */
+    padding: 12px 16px; /* Binnenruimte */
+    text-align: left; /* Tekst links uitlijnen */
 }
 
 .league-table td {
-    padding: 12px 16px;
-   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    text-align: left;
+    padding: 12px 16px; /* Binnenruimte in cellen */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Lichte lijn tussen rijen */
+    text-align: left; /* Tekst links uitlijnen */
 }
+
 .league-table tbody tr:nth-child(even) {
-    background-color: rgba(132, 169, 140, 0.15);
+    background-color: rgba(132, 169, 140, 0.15); /* Afwisselende rijkleur (lichtgroen) */
 }
 
 .team-logo {
-    width: 20px;
+    width: 20px; /* Kleine teamlogo's */
     height: auto;
-    margin-right: 8px;
-    vertical-align: middle;
+    margin-right: 8px; /* Ruimte tussen logo en tekst */
+    vertical-align: middle; /* Logo op gelijke hoogte met tekst */
 }
 
-/* Seizoenselectie + knop wrapper */
 .season-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    gap: 10px;
+    display: flex; /* Layout met dropdown en knop naast elkaar */
+    justify-content: space-between; /* Ruimte tussen de elementen */
+    align-items: center; /* Verticaal gecentreerd */
+    margin-bottom: 1rem; /* Ruimte onder de bar */
+    gap: 10px; /* Afstand tussen elementen */
 }
 
-/* Alleen de dropdown */
 .season-selector select {
-    padding: 6px 10px;
-    border: 1px solid var(--green);
-    border-radius: 4px;
-    background-color: var(--dark-green);
-    color: var(--dark-grey);
+    padding: 6px 10px; /* Binnenruimte dropdown */
+    border: 1px solid var(--green); /* Groene rand */
+    border-radius: 4px; /* Afgeronde hoeken */
+    background-color: var(--dark-green); /* Donkergroene achtergrond */
+    color: var(--dark-grey); /* Donkergrijze tekstkleur */
     font-size: 0.9rem;
-    height: 36px;
+    height: 36px; /* Vaste hoogte voor uitlijning */
 }
 
-/* Bekijk alle teams knop */
 .view-teams-button {
-    background-color: var(--dark-green);
-    color: var(--dark-grey);
-    padding: 6px 12px;
+    background-color: var(--dark-green); /* Donkergroene knop */
+    color: var(--dark-grey); /* Donkergrijze tekst */
+    padding: 6px 12px; /* Binnenruimte */
     font-size: 0.9rem;
     height: 36px;
     border: none;
     border-radius: 4px;
-    cursor: pointer;
+    cursor: pointer; /* Cursor als handje bij hover */
     font-weight: 600;
-    transition: background-color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out; /* Zachte overgang bij hover */
 }
 
 .view-teams-button:hover {
-    background-color: var(--green);
+    background-color: var(--green); /* Heldere groene hoverkleur */
 }
 
-/* Tabs bovenin */
 .tab-selector {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
+    display: flex; /* Knoppen naast elkaar */
+    gap: 10px; /* Ruimte tussen de tabknoppen */
+    margin-bottom: 10px; /* Ruimte onder tabs */
 }
 
 .tab-selector button {
-    background-color: var(--dark-grey);
-    color: white;
+    background-color: var(--dark-grey); /* Donkergrijze achtergrond */
+    color: white; /* Witte tekst */
     border: none;
     padding: 8px 16px;
     border-radius: 4px;
@@ -88,30 +85,28 @@
 }
 
 .tab-selector button.active {
-    background-color: var(--green);
-    color: var(--dark-grey);
-    font-weight: bold;
+    background-color: var(--green); /* Groene knop voor actieve tab */
+    color: var(--dark-grey); /* Donkergrijze tekst */
+    font-weight: bold; /* Duidelijk actieve status */
 }
 
-/* Lege stand */
 .league-table-empty {
-    font-style: italic;
-    color: var(--green);
-    margin-top: 1rem;
+    font-style: italic; /* Schuingedrukte melding */
+    color: var(--green); /* Groene tekstkleur */
+    margin-top: 1rem; /* Ruimte boven melding */
 }
 
-/* Lijst van wedstrijden */
 .event-list {
-    list-style: none;
+    list-style: none; /* Geen standaard bullets */
     padding: 0;
     margin: 0;
 }
 
 .event-list li {
-    background-color: var(--dark-green);
-    padding: 8px;
-    margin-bottom: 6px;
-    border-radius: 4px;
-    color: white;
+    background-color: var(--dark-green); /* Donkergroene achtergrond voor elke wedstrijd */
+    padding: 8px; /* Binnenruimte */
+    margin-bottom: 6px; /* Ruimte tussen wedstrijden */
+    border-radius: 4px; /* Afgeronde hoeken */
+    color: white; /* Witte tekst */
 }
 

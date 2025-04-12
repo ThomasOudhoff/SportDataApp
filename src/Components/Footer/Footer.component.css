@@ -1,9 +1,9 @@
 .footer {
-    background-color: var(--green);
-    color: var(--dark-grey);
-    text-align: center;
-    padding: 20px;
-    margin-top: 40px;
-    border-top: 2px solid var(--green);
-    font-size: 0.9rem;
+    background-color: var(--green); /* Groene achtergrondkleur */
+    color: var(--dark-grey); /* Donkergrijze tekstkleur */
+    text-align: center; /* Centrering van de tekst */
+    padding: 20px; /* Binnenruimte rondom */
+    margin-top: 40px; /* Ruimte boven de footer */
+    border-top: 2px solid var(--green); /* Bovenrand in dezelfde kleur */
+    font-size: 0.9rem; /* Iets kleinere tekstgrootte */
 }

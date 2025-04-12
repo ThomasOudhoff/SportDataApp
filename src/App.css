@@ -1,11 +1,13 @@
 :root {
-  --green: #84A98C;
-  --dark-grey: #282c34;
-  --dark-green: #52735E;
+  --green: #84A98C;       /* Hoofdkleur groen */
+  --dark-grey: #282c34;   /* Donkergrijs voor achtergronden */
+  --dark-green: #52735E;  /* Donkergroen accentkleur */
 }
+
 html {
-  background-color: var(--dark-grey);
+  background-color: var(--dark-grey); /* Achtergrondkleur voor hele pagina */
 }
+
 .App {
   text-align: center;
   background-color: var(--dark-grey);
@@ -19,7 +21,7 @@ html {
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    animation: App-logo-spin infinite 20s linear; /* Draaiende logo-animatie */
   }
 }
 
@@ -30,12 +32,12 @@ html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(10px + 2vmin); /* Responsieve tekstgrootte */
   color: var(--dark-grey);
 }
 
 .App-link {
-  color: #61dafb;
+  color: #61dafb; /* Standaard React linkkleur */
 }
 
 @keyframes App-logo-spin {
@@ -47,13 +49,14 @@ html {
   }
 }
 
-
+/* Grid layout met 3/1 verhouding */
 .grid {
   display: grid;
   grid-template-columns: 3fr 1fr;
   padding: 10px;
 }
 
+/* Panel met groene achtergrond */
 .panel {
   background-color: var(--green);
   padding: 10px;
@@ -61,58 +64,34 @@ html {
   margin: 5px 7px;
 }
 
-
+/* Margins (utilities) */
 .m-0 {
   margin: 0;
 }
 
-.ms-1 {
-  margin-left: 0.25rem;
-}
-.ms-2 {
-  margin-left: 0.5rem;
-}
-.ms-3 {
-  margin-left: 0.75rem;
-}
-.ms-4 {
-  margin-left: 1rem;
-}
-.ms-5 {
-  margin-left: 1.25rem;
-}
+/* Margin start (links) */
+.ms-1 { margin-left: 0.25rem; }
+.ms-2 { margin-left: 0.5rem; }
+.ms-3 { margin-left: 0.75rem; }
+.ms-4 { margin-left: 1rem; }
+.ms-5 { margin-left: 1.25rem; }
 
-.me-1 {
-  margin-right: 0.25rem;
-}
-.me-2 {
-  margin-right: 0.5rem;
-}
-.me-3 {
-  margin-right: 0.75rem;
-}
-.me-4 {
-  margin-right: 1rem;
-}
-.me-5 {
-  margin-right: 1.25rem;
-}
+/* Margin end (rechts) */
+.me-1 { margin-right: 0.25rem; }
+.me-2 { margin-right: 0.5rem; }
+.me-3 { margin-right: 0.75rem; }
+.me-4 { margin-right: 1rem; }
+.me-5 { margin-right: 1.25rem; }
 
-.mt-1 {
-  margin-top: 0.25rem;
-}
-.mt-2 {
-  margin-top: 0.5rem;
-}
-.mt-3 {
-  margin-top: 0.75rem;
-}
-.mt-4 {
-  margin-top: 1rem;
-}
-.mt-5 {
-  margin-top: 1.25rem;
-}
+/* Margin top */
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 0.75rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-5 { margin-top: 1.25rem; }
+
+/* Tekst links uitlijnen */
 .text-start {
   text-align: left;
 }
+

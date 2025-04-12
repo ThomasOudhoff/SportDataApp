@@ -1,11 +1,11 @@
 .league_item {
-    margin-top: 2px;
-    margin-bottom: 2px;
-    padding: 2px 5px;
+    margin-top: 2px; /* Ruimte boven het item */
+    margin-bottom: 2px; /* Ruimte onder het item */
+    padding: 2px 5px; /* Binnenruimte rondom de tekst */
 }
 
 .league_item:hover {
-    background-color: var(--green);
-    color: var(--dark-grey);
-    cursor: pointer;
+    background-color: var(--green); /* Groene achtergrond bij hover */
+    color: var(--dark-grey); /* Donkergrijze tekstkleur bij hover */
+    cursor: pointer; /* Cursor verandert in een handje */
 }

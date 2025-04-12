@@ -1,46 +1,48 @@
 .navbar {
-    background-color: var(--green);
-    padding: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    color: #000;
+    background-color: var(--green); /* Groene achtergrond voor de navigatiebalk */
+    padding: 16px; /* Binnenruimte rondom de inhoud */
+    display: flex; /* Flex layout voor linker- en rechterkant */
+    justify-content: space-between; /* Spatie tussen datum en links */
+    align-items: center; /* Verticale uitlijning centreren */
+    margin-bottom: 20px; /* Ruimte onder de navbar */
+    color: #000; /* Zwarte tekstkleur */
 }
 
 .navbar .datetime {
-    font-size: 16px;
+    font-size: 16px; /* Standaard lettergrootte voor datum/tijd */
 }
 
 .navbar ul {
-    display: flex;
-    list-style: none;
-    gap: 20px;
+    display: flex; /* Navigatielinks naast elkaar */
+    list-style: none; /* Geen standaard bullets */
+    gap: 20px; /* Ruimte tussen de links */
     margin: 0;
     padding: 0;
 }
 
 .navbar ul li {
-    margin: 0;
+    margin: 0; /* Geen extra marge per lijstitem */
 }
 
 .navbar .nav-links a {
-    padding: 10px 10px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-    margin: 10px;
+    padding: 10px 10px; /* Binnenruimte rond de linktekst */
+    text-decoration: none; /* Geen onderstreping */
+    transition: background-color 0.3s ease; /* Soepele overgang op hover */
+    margin: 10px; /* Buitenruimte rond de links */
 }
 
 .navbar ul li:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px); /* Lichte optische lift bij hover */
 }
+
 .logout-link {
-    color: white;
-    cursor: pointer;
-    margin-left: 15px;
-    text-decoration: underline;
+    color: white; /* Witte tekstkleur */
+    cursor: pointer; /* Cursor verandert in handje */
+    margin-left: 15px; /* Ruimte ten opzichte van de vorige link */
+    text-decoration: underline; /* Onderstreept voor nadruk */
 }
+
 .logout-link:hover {
-    color: var(--green);
+    color: var(--green); /* Kleurverandering bij hover */
 }
 

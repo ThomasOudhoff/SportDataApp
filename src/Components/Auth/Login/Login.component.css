@@ -3,65 +3,64 @@
     max-width: 500px;
     margin: 60px auto;
     padding: 30px 40px;
-    background-color: var(--green);
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-    color: var(--dark-grey);
-    font-size: 0.95rem;
+    background-color: var(--green); /* Groene achtergrondkleur */
+    border-radius: 16px; /* Afgeronde hoeken */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); /* Zachte schaduw voor diepte */
+    color: var(--dark-grey); /* Donkergrijze tekstkleur */
+    font-size: 0.95rem; /* Iets kleinere tekstgrootte dan standaard */
 }
 
 .login_window label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
-    color: var(--dark-grey);
+    font-weight: bold; /* Dikke tekst voor labels */
+    margin-bottom: 5px; /* Ruimte onder het label */
+    display: block; /* Blokelement zodat marge werkt */
+    color: var(--dark-grey); /* Kleur consistent met omgeving */
 }
 
 input {
     width: 100%;
     padding: 10px 14px;
     margin-bottom: 20px;
-    border: 1px solid var(--green);
-    border-radius: 6px;
-    background-color: var(--dark-grey);
-    color: var(--green);
+    border: 1px solid var(--green); /* Groene rand */
+    border-radius: 6px; /* Afgeronde hoeken */
+    background-color: var(--dark-grey); /* Donkergrijze achtergrond */
+    color: var(--green); /* Groene tekstkleur */
     font-size: 1rem;
     box-sizing: border-box;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Animatie bij focus */
 }
 
 input:focus {
-    border-color: var(--green);
-    box-shadow: 0 0 5px rgba(132, 169, 140, 0.6);
-    outline: none;
+    border-color: var(--green); /* Accent bij focus */
+    box-shadow: 0 0 5px rgba(132, 169, 140, 0.6); /* Lichtgroene gloed */
+    outline: none; /* Geen standaard browserrand */
 }
 
 input::placeholder {
-    color: #ccc;
-    font-style: italic;
+    color: #ccc; /* Lichtgrijze placeholder */
+    font-style: italic; /* Cursief voor stijl */
 }
 
 button {
     width: 100%;
     padding: 12px;
-    background-color: var(--green);   /* ✔ groene achtergrond */
-    color: var(--dark-grey);          /* ✔ donkergrijze tekst */
+    background-color: var(--green); /* Primaire kleur voor knop */
+    color: var(--dark-grey); /* Donkergrijze tekst */
     font-weight: bold;
     border: none;
     border-radius: 6px;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Soepele hover */
 }
 
 button:hover {
-    background-color: var(--dark-green); /* ✔ donkerdere groen bij hover */
-    transform: translateY(-2px);
+    background-color: var(--dark-green); /* Donkerdere groen bij hover */
+    transform: translateY(-2px); /* Kleine optische lift */
 }
 
-/* Registratie sectie */
 .register-link {
-    margin-top: 20px;
+    margin-top: 20px; /* Ruimte boven registratiedeel */
     text-align: center;
 }
 
@@ -73,7 +72,7 @@ button:hover {
 
 .register-link button {
     padding: 10px 20px;
-    background-color: var(--green);     /* ✔ zelfde styling als hoofdknop */
+    background-color: var(--green); /* Zelfde groene kleur als standaard knop */
     color: var(--dark-grey);
     border: none;
     border-radius: 6px;
@@ -84,7 +83,7 @@ button:hover {
 }
 
 .register-link button:hover {
-    background-color: var(--dark-green);
+    background-color: var(--dark-green); /* Donkerder groen bij hover */
     color: var(--dark-grey);
 }
 
