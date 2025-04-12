@@ -24,7 +24,7 @@ function LeaguesList({ searchQuery, selectedLeague, onSelectLeague }) {
     );
 
     return (
-        <div className="league_wrapper">
+        <div className="league_wrapper mt-2">
             {filteredLeagues.map((league) => (
                 <div
                     key={league.idLeague}

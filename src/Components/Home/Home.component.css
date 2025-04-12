@@ -2,7 +2,7 @@
     display: flex;
     height: 100vh; /* volledige hoogte van scherm */
     gap: 20px;
-    padding: 20px;
+    padding: 0px 20px 20px 20px;
     box-sizing: border-box;
 }
 .leftPanel {
@@ -32,5 +32,4 @@
 .scrollableContent {
     flex: 1;
     overflow-y: auto;
-    margin-top: 1em;
 }

@@ -113,3 +113,6 @@ html {
 .mt-5 {
   margin-top: 1.25rem;
 }
+.text-start {
+  text-align: left;
+}

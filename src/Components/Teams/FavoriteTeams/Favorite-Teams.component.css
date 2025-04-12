@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    background-color: var(--dark-grey);
 }
 
 /* 🔁 Wisselende achtergrondkleuren *
@@ -32,7 +33,7 @@
 .team-name {
     font-weight: bold;
     font-size: 0.95rem;
-    color: var(--dark-grey);
+    color: var(--green);
     text-decoration: none;
 }
 
@@ -75,20 +76,10 @@
 .favorite-star:hover {
     color: darkorange;
 }
-.favorites-wrapper .team-row:nth-child(odd) {
-    background-color: hotpink !important;
+.favorites-wrapper .team-row:nth-child(even) {
+    background-color: rgba(132, 169, 140, 0.15);
 }
 
-.favorites-wrapper .team-row:nth-child(even) {
-    background-color: lightgreen !important;
-}
-.favorites-wrapper .team-row:nth-child(even) {
-    background-color: rgba(132, 169, 140, 0.15)!important;
-}
-
-.favorites-wrapper .team-row:nth-child(odd) {
-    background-color: rgba(132, 169, 140, 0.3)!important;
-}
 
 
 

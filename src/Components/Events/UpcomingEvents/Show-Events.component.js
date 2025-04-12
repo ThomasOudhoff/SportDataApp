@@ -8,6 +8,7 @@ function UpcomingEvents({ events }) {
 
     return (
         <div className="eventList">
+            <i>hallo ik zoek een fout</i>
             {events.map((event) => {
                 const [homeTeamName, awayTeamName] = event.strEvent.split(" vs ");
                 return (
@@ -23,7 +24,7 @@ function UpcomingEvents({ events }) {
                                 )}
                                 <span>{event.strLeague}</span>
                             </div>
-                            <span className="eventDate">
+                            <span className="eventDate me-2">
                                 {new Date(event.dateEvent).toLocaleDateString('nl-NL')}
                             </span>
                         </div>
@@ -32,19 +33,19 @@ function UpcomingEvents({ events }) {
                             <div className="eventLeft">
                                 <div className="teamRow">
                                     <img src={event.strHomeTeamBadge} alt="Home Team Badge" className="teamLogo"/>
-                                    <span className="teamName">{homeTeamName}</span>
+                                    <span className="teamName text-start">{homeTeamName}</span>
                                     {event.intHomeScore !== null && (
                                         <span className="teamScore">{event.intHomeScore}</span>
                                     )}
                                 </div>
                                 <div className="teamRow">
                                     <img src={event.strAwayTeamBadge} alt="Away Team Badge" className="teamLogo"/>
-                                    <span className="teamName">{awayTeamName}</span>
+                                    <span className="teamName text-start">{awayTeamName}</span>
                                     {event.intAwayScore !== null && (
                                         <span className="teamScore">{event.intAwayScore}</span>
                                     )}
                                 </div>
-                                <p className="stadium">{event.strVenue}</p>
+                                <p className="stadium text-start">{event.strVenue}</p>
                             </div>
                             <div className="eventRight">
                                 <p className="eventTime">{event.strTime?.slice(0, 5)}</p>

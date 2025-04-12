@@ -81,7 +81,7 @@ function TeamsDetails() {
                 </div>
             </div>
 
-            <div className="rightBlock">
+            <div className="rightBlock medium-scroll">
                 <div className="tab-selector">
                     <button
                         className={activeTab === "upcoming" ? "active" : ""}
