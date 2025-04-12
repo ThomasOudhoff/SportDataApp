@@ -23,7 +23,7 @@ const Register = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Api-Key': 'sportdataapp:2gCMFn7OsqAAY15nbACY'
+                    'X-Api-Key': process.env.REACT_APP_API_KEY
                 },
                 body: JSON.stringify({
                     username,

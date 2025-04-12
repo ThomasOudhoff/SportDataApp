@@ -8,7 +8,6 @@ function FavoriteTeams() {
     const [favoriteTeams, setFavoriteTeams] = useState([]);
     const [results, setResults] = useState({});
     const [teamDetails, setTeamDetails] = useState({});
-    console.log("Eerste team:", teamDetails[133601]);
 
     useEffect(() => {
         const storedFavorites = JSON.parse(localStorage.getItem("favoriteTeams")) || [];
@@ -61,19 +60,6 @@ function FavoriteTeams() {
             const didWin = (isHome && homeScore > awayScore) || (!isHome && awayScore > homeScore);
             return didWin ? 'W' : 'V';
         });
-    };
-    const toggleFavorite = (teamId) => {
-        const storedFavorites = JSON.parse(localStorage.getItem("favoriteTeams")) || [];
-
-        let updatedFavorites;
-        if (storedFavorites.includes(teamId)) {
-            updatedFavorites = storedFavorites.filter(id => id !== teamId);
-        } else {
-            updatedFavorites = [...storedFavorites, teamId];
-        }
-
-        localStorage.setItem("favoriteTeams", JSON.stringify(updatedFavorites));
-        setFavoriteTeams(updatedFavorites);
     };
     const handleRemoveFavorite = (teamId, teamName) => {
         const confirm = window.confirm(`Weet je zeker dat je ${teamName} uit je favorieten wilt verwijderen?`);

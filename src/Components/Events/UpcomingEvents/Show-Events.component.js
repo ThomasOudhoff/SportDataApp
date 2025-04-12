@@ -8,7 +8,6 @@ function UpcomingEvents({ events }) {
 
     return (
         <div className="eventList">
-            <i>hallo ik zoek een fout</i>
             {events.map((event) => {
                 const [homeTeamName, awayTeamName] = event.strEvent.split(" vs ");
                 return (
