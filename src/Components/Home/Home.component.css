@@ -1,12 +1,10 @@
 .pageLayout {
     display: flex;
-    height: 100%;               /* Volledige schermhoogte */
+    height: 100vh; /* volledige hoogte van scherm */
+    gap: 20px;
     padding: 20px;
     box-sizing: border-box;
-    gap: 20px;
-
 }
-
 .leftPanel {
     flex: 2;
     background-color: var(--green);
@@ -14,8 +12,8 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
     height: 100%;
+    overflow: hidden;
 }
 
 .rightPanel {
@@ -25,12 +23,14 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
     height: 100%;
+    overflow: hidden;
 }
 
-/* Inhoud binnenin scrollbaar maken */
+
+/* De scrollbare binnenkant */
 .scrollableContent {
     flex: 1;
     overflow-y: auto;
+    margin-top: 1em;
 }
