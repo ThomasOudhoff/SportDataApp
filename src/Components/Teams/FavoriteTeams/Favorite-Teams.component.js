@@ -1,15 +1,21 @@
 // src/Components/FavoriteTeams/Favorite-Teams.component.js
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
-
 import "./Favorite-Teams.component.css";
 
 function FavoriteTeams() {
+    // State: lijst van favoriete teams uit localStorage
     const [favoriteTeams, setFavoriteTeams] = useState([]);
+
+    // State: resultaten (laatste wedstrijden) per team
     const [results, setResults] = useState({});
+
+    // State: teamdetails zoals naam en logo
     const [teamDetails, setTeamDetails] = useState({});
 
+    // Ophalen van data bij laden van de component
     useEffect(() => {
+        // Haal favorieten op uit localStorage
         const storedFavorites = JSON.parse(localStorage.getItem("favoriteTeams")) || [];
         setFavoriteTeams(storedFavorites);
 
@@ -19,10 +25,12 @@ function FavoriteTeams() {
 
             for (let teamId of storedFavorites) {
                 try {
+                    // Haal laatste wedstrijden op
                     const resultRes = await fetch(`https://www.thesportsdb.com/api/v1/json/3/eventslast.php?id=${teamId}`);
                     const resultData = await resultRes.json();
                     allResults[teamId] = resultData.results || [];
 
+                    // Haal teamgegevens op (naam en logo)
                     const teamRes = await fetch(`https://www.thesportsdb.com/api/v1/json/3/lookupteam.php?id=${teamId}`);
                     const teamData = await teamRes.json();
                     const team = teamData.teams?.[0];
@@ -37,15 +45,18 @@ function FavoriteTeams() {
                 }
             }
 
+            // Sla alle resultaten en details op in state
             setResults(allResults);
             setTeamDetails(allDetails);
         };
 
+        // Start het ophalen van data als er favorieten zijn
         if (storedFavorites.length > 0) {
             fetchData();
         }
     }, []);
 
+    // Bepaal de vorm (W/G/V) van de laatste 5 wedstrijden
     const getForm = (teamId) => {
         const matches = results[teamId] || [];
         const teamName = teamDetails[teamId]?.name || "";
@@ -55,12 +66,14 @@ function FavoriteTeams() {
             const homeScore = parseInt(match.intHomeScore);
             const awayScore = parseInt(match.intAwayScore);
 
-            if (isNaN(homeScore) || isNaN(awayScore)) return 'N';
-            if (homeScore === awayScore) return 'G';
+            if (isNaN(homeScore) || isNaN(awayScore)) return 'N'; // N = onbekend
+            if (homeScore === awayScore) return 'G'; // Gelijkspel
             const didWin = (isHome && homeScore > awayScore) || (!isHome && awayScore > homeScore);
-            return didWin ? 'W' : 'V';
+            return didWin ? 'W' : 'V'; // Win of Verlies
         });
     };
+
+    // Verwijder een team uit de favorieten
     const handleRemoveFavorite = (teamId, teamName) => {
         const confirm = window.confirm(`Weet je zeker dat je ${teamName} uit je favorieten wilt verwijderen?`);
         if (confirm) {
@@ -68,7 +81,9 @@ function FavoriteTeams() {
             localStorage.setItem("favoriteTeams", JSON.stringify(updatedFavorites));
             setFavoriteTeams(updatedFavorites);
         }
-    };return (
+    };
+
+    return (
         <div className="pageLayout">
             <div className="leftPanel scrollableContent">
                 <h1>Mijn Favoriete Teams</h1>
@@ -76,6 +91,7 @@ function FavoriteTeams() {
                 <div className="favorites-wrapper">
                     {favoriteTeams.map((teamId) => (
                         <div key={teamId} className="team-row">
+                            {/* Teamlogo en naam (klikbaar) */}
                             <div className="team-left">
                                 <img
                                     src={teamDetails[teamId]?.logo}
@@ -87,14 +103,16 @@ function FavoriteTeams() {
                                 </Link>
                             </div>
 
+                            {/* Laatste 5 resultaten */}
                             <div className="form">
                                 {getForm(teamId).map((result, idx) => (
                                     <span key={idx} className={`form-block ${result}`}>
-                            {result}
-                            </span>
+                                        {result}
+                                    </span>
                                 ))}
                             </div>
 
+                            {/* Ster om team uit favorieten te verwijderen */}
                             <i
                                 className="fas fa-star favorite-star"
                                 title="Verwijder uit favorieten"
@@ -109,6 +127,7 @@ function FavoriteTeams() {
 }
 
 export default FavoriteTeams;
+
 
 
 

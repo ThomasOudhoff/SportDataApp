@@ -7,14 +7,24 @@ function LeagueTable({ league }) {
     const currentYear = new Date().getFullYear();
     const latestSeason = `${currentYear - 1}-${currentYear}`;
 
+    // Geselecteerd seizoen
     const [selectedSeason, setSelectedSeason] = useState(latestSeason);
+
+    // Ranglijstgegevens van het geselecteerde seizoen
     const [standings, setStandings] = useState([]);
+
+    // Aankomende wedstrijden
     const [events, setEvents] = useState([]);
+
+    // Laadstatus (true tijdens API-oproepen)
     const [loading, setLoading] = useState(false);
+
+    // Actieve tab: 'stand' of 'events'
     const [activeTab, setActiveTab] = useState("stand");
+
     const navigate = useNavigate();
 
-    // Stand ophalen
+    // Ophalen van ranglijst bij wijziging van competitie, seizoen of tab
     useEffect(() => {
         if (activeTab !== "stand" || !league?.idLeague) return;
 
@@ -27,7 +37,7 @@ function LeagueTable({ league }) {
                 const data = await res.json();
                 setStandings(data.table || []);
             } catch (error) {
-                console.error("Error fetching standings:", error);
+                console.error("Fout bij ophalen van ranglijst:", error);
                 setStandings([]);
             } finally {
                 setLoading(false);
@@ -37,7 +47,7 @@ function LeagueTable({ league }) {
         fetchTable();
     }, [league, selectedSeason, activeTab]);
 
-    // Wedstrijden ophalen
+    // Ophalen van aankomende wedstrijden bij wijziging van competitie of tab
     useEffect(() => {
         if (activeTab !== "events" || !league?.idLeague) return;
 
@@ -50,7 +60,7 @@ function LeagueTable({ league }) {
                 const data = await res.json();
                 setEvents(data.events || []);
             } catch (error) {
-                console.error("Error fetching events:", error);
+                console.error("Fout bij ophalen van evenementen:", error);
                 setEvents([]);
             } finally {
                 setLoading(false);
@@ -62,7 +72,7 @@ function LeagueTable({ league }) {
 
     return (
         <div>
-            {/* Tabs */}
+            {/* Tabs om te wisselen tussen 'stand' en 'volgende wedstrijden' */}
             <div className="tab-selector">
                 <button
                     className={activeTab === "stand" ? "active" : ""}
@@ -78,9 +88,10 @@ function LeagueTable({ league }) {
                 </button>
             </div>
 
-            {/* STANDEN TAB */}
+            {/* Weergave van ranglijst als 'stand' actief is */}
             {activeTab === "stand" && (
                 <>
+                    {/* Seizoenselectie en knop om naar teampagina te gaan */}
                     <div className="season-bar">
                         <div className="season-selector">
                             <select
@@ -107,6 +118,7 @@ function LeagueTable({ league }) {
                         </button>
                     </div>
 
+                    {/* Toon stand of melding indien leeg */}
                     {loading ? (
                         <p>Stand wordt geladen...</p>
                     ) : standings.length > 0 ? (
@@ -143,7 +155,7 @@ function LeagueTable({ league }) {
                 </>
             )}
 
-            {/* EVENTS TAB */}
+            {/* Weergave van aankomende wedstrijden als 'events' actief is */}
             {activeTab === "events" && (
                 <>
                     {loading ? (
