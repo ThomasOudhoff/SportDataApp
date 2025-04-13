@@ -20,7 +20,6 @@ function TeamsList() {
     // Controleert of gebruiker is ingelogd
     const isAuthenticated = !!localStorage.getItem("JWT");
 
-
     // Laad teams op basis van de leagueId wanneer de component laadt of leagueId verandert
     useEffect(() => {
         const fetchTeams = async () => {
@@ -58,9 +57,9 @@ function TeamsList() {
         localStorage.setItem("favoriteTeams", JSON.stringify(updated)); // opslaan in localStorage
     };
 
-    // Navigeer naar de detailpagina van een specifiek team
+    // Navigeer naar de detailpagina van een specifiek team en geef de leagueId door in de URL
     const navigateTeam = (teamId) => {
-        navigate(`/teams/${teamId}`);
+        navigate(`/teams/${teamId}?leagueId=${encodeURIComponent(leagueId)}`);
     };
 
     return (
@@ -73,7 +72,7 @@ function TeamsList() {
                         <img src={team.logo} alt={team.name} width="100" />
                     </div>
 
-                    {/* Ster-icoon om team als favoriet aan/uit te vinken, alleen wanner gebruiker is ingelogd*/}
+                    {/* Ster-icoon om team als favoriet aan/uit te vinken, alleen wanneer gebruiker is ingelogd */}
                     {isAuthenticated && (
                         <i
                             className={`fas fa-star favoriteStar ${favorites.includes(team.id) ? 'active' : ''}`}

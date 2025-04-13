@@ -1,8 +1,23 @@
 .favorites-wrapper {
-    display: flex; /* Lijst met teams onder elkaar */
-    flex-direction: column;
-    width: 100%;
-    background-color: var(--dark-grey); /* Achtergrond van de favorietenlijst */
+    display: grid;
+    grid-auto-flow: column;          /* Zet automatisch nieuwe kolommen */
+    grid-template-rows: repeat(10, auto); /* Maximaal 10 rijen per kolom */
+    gap: 10px 30px;                  /* Ruimte tussen rijen en kolommen */
+    align-items: start;
+    background-color: var(--dark-grey);
+    color: var(--green);
+    padding: 10px;
+}
+
+.favorites-layout {
+    align-items: flex-start; /* Zorgt dat de panel niet de hele hoogte neemt */
+    height: auto; /* Laat de paginahoogte afhangen van inhoud */
+}
+
+.favorites-panel {
+    height: auto;
+    min-height: fit-content;
+    overflow: visible; /* Voorkomt dat het alsnog als scrollbaar blok werkt */
 }
 
 .team-row {
@@ -74,6 +89,13 @@
 .favorites-wrapper .team-row:nth-child(even) {
     background-color: rgba(132, 169, 140, 0.15); /* Lichtgroene achtergrond voor afwisseling */
 }
+@media (max-width: 768px) {
+    .favorites-wrapper {
+        grid-auto-flow: row;
+        grid-template-columns: 1fr;
+    }
+}
+
 
 
 

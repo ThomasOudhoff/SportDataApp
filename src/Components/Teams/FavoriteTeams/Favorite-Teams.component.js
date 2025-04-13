@@ -82,44 +82,51 @@ function FavoriteTeams() {
             setFavoriteTeams(updatedFavorites);
         }
     };
-
     return (
-        <div className="pageLayout">
-            <div className="leftPanel scrollableContent">
+        <div className="pageLayout favorites-layout">
+            <div className="leftPanel favorites-panel">
                 <h1>Mijn Favoriete Teams</h1>
 
                 <div className="favorites-wrapper">
-                    {favoriteTeams.map((teamId) => (
-                        <div key={teamId} className="team-row">
-                            {/* Teamlogo en naam (klikbaar) */}
-                            <div className="team-left">
-                                <img
-                                    src={teamDetails[teamId]?.logo}
-                                    alt={teamDetails[teamId]?.name}
-                                    className="team-logo"
-                                />
-                                <Link to={`/teams/${teamId}`} className="team-name">
-                                    {teamDetails[teamId]?.name}
-                                </Link>
-                            </div>
+                    {favoriteTeams.length === 0 ? (
+                        <p>
+                            Je hebt nog geen favoriete teams toegevoegd.{" "}
+                            <Link to="/">Ga naar de homepagina</Link> en kies vanuit je favorieten competitie je
+                            favorieten teams om te volgen markeren.
+                        </p>
+                    ) : (
+                        favoriteTeams.map((teamId) => (
+                            <div key={teamId} className="team-row">
+                                {/* Teamlogo en naam (klikbaar) */}
+                                <div className="team-left">
+                                    <img
+                                        src={teamDetails[teamId]?.logo}
+                                        alt={teamDetails[teamId]?.name}
+                                        className="team-logo"
+                                    />
+                                    <Link to={`/teams/${teamId}`} className="team-name">
+                                        {teamDetails[teamId]?.name}
+                                    </Link>
+                                </div>
 
-                            {/* Laatste 5 resultaten */}
-                            <div className="form">
-                                {getForm(teamId).map((result, idx) => (
-                                    <span key={idx} className={`form-block ${result}`}>
-                                        {result}
-                                    </span>
-                                ))}
-                            </div>
+                                {/* Laatste 5 resultaten */}
+                                <div className="form">
+                                    {getForm(teamId).map((result, idx) => (
+                                        <span key={idx} className={`form-block ${result}`}>
+                                    {result}
+                                </span>
+                                    ))}
+                                </div>
 
-                            {/* Ster om team uit favorieten te verwijderen */}
-                            <i
-                                className="fas fa-star favorite-star"
-                                title="Verwijder uit favorieten"
-                                onClick={() => handleRemoveFavorite(teamId, teamDetails[teamId]?.name)}
-                            ></i>
-                        </div>
-                    ))}
+                                {/* Ster om team uit favorieten te verwijderen */}
+                                <i
+                                    className="fas fa-star favorite-star"
+                                    title="Verwijder uit favorieten"
+                                    onClick={() => handleRemoveFavorite(teamId, teamDetails[teamId]?.name)}
+                                ></i>
+                            </div>
+                        ))
+                    )}
                 </div>
             </div>
         </div>

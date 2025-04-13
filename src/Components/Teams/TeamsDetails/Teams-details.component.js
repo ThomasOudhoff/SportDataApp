@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import "./Teams-details.component.css";
 import UpcomingEvents from '../../Events/UpcomingEvents/Show-Events.component';
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams, useNavigate } from "react-router-dom";
+
 
 function TeamsDetails() {
     // Teamgegevens
@@ -18,6 +19,11 @@ function TeamsDetails() {
     const { id } = useParams();
 
     // Haal teamdetails + wedstrijden op zodra component laadt of het ID verandert
+    const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
+    const leagueId = searchParams.get('leagueId');
+    console.log("leagueId:", leagueId);
+
     useEffect(() => {
         // Haal gegevens van het geselecteerde team op
         const fetchTeam = async () => {
@@ -85,7 +91,6 @@ function TeamsDetails() {
                     <p>{team.stadium}</p>
                     <p>{"Capacity: " + team.capStadium}</p>
                 </div>
-
                 <p className="desc">{team.desc}</p>
 
                 {/* Social media iconen */}
@@ -95,6 +100,17 @@ function TeamsDetails() {
                     <a href={twitterUrl} target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
                     <a href={instagramUrl} target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
                 </div>
+                {/* Conditieel tonen van de knop */}
+                {leagueId && (
+                    <div className="back-button-container">
+                        <button
+                            className="back-button"
+                            onClick={() => navigate(`/teams?leagueId=${leagueId}`)}
+                        >
+                            ← Terug naar alle teams
+                        </button>
+                    </div>
+                )}
             </div>
 
             {/* Rechterzijde met wedstrijden */}

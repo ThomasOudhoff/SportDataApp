@@ -201,3 +201,19 @@ body {
     max-height: 500px;
     overflow-y: scroll;
 }
+.back-button {
+    margin-bottom: 20px;
+    margin-top: 60px;
+    background-color: var(--dark-green);
+    color: var(--dark-grey);
+    padding: 8px 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: var(--green);
+}
