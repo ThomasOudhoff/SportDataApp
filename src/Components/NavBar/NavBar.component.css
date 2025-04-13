@@ -1,48 +1,52 @@
+/* Navigatiebalk styling */
 .navbar {
-    background-color: var(--green); /* Groene achtergrond voor de navigatiebalk */
-    padding: 16px; /* Binnenruimte rondom de inhoud */
-    display: flex; /* Flex layout voor linker- en rechterkant */
-    justify-content: space-between; /* Spatie tussen datum en links */
-    align-items: center; /* Verticale uitlijning centreren */
-    margin-bottom: 20px; /* Ruimte onder de navbar */
-    color: #000; /* Zwarte tekstkleur */
+    background-color: var(--green); /* Groene achtergrondkleur */
+    display: flex; /* Flexbox voor horizontale layout */
+    justify-content: space-between; /* Verdeel ruimte tussen links en datum/tijd */
+    align-items: center; /* Verticaal centreren van inhoud */
+    margin-bottom: 20px; /* Ruimte onder de navigatiebalk */
+    color: #000; /* Tekstkleur voor de inhoud van de navbar */
 }
 
+/* Datum/tijd styling in de navbar */
 .navbar .datetime {
-    font-size: 16px; /* Standaard lettergrootte voor datum/tijd */
+    font-size: 16px; /* Lettergrootte van de datum/tijd */
 }
 
-.navbar ul {
-    display: flex; /* Navigatielinks naast elkaar */
-    list-style: none; /* Geen standaard bullets */
-    gap: 20px; /* Ruimte tussen de links */
-    margin: 0;
-    padding: 0;
-}
-
-.navbar ul li {
-    margin: 0; /* Geen extra marge per lijstitem */
-}
-
+/* Navigatielinks als blokken weergegeven */
 .navbar .nav-links a {
-    padding: 10px 10px; /* Binnenruimte rond de linktekst */
+    display: inline-block; /* Gedraagt zich als blok zodat padding/randen werken */
+    padding: 8px 12px; /* Binnenruimte rondom de linktekst */
+    border: var(--dark-grey); /* Randkleur via CSS-variabele */
+    border-radius: 8px; /* Afgeronde hoeken voor een zachter uiterlijk */
+    background-color: var(--dark-grey); /* Achtergrondkleur van de link */
+    color: var(--green); /* Tekstkleur van de link */
     text-decoration: none; /* Geen onderstreping */
-    transition: background-color 0.3s ease; /* Soepele overgang op hover */
-    margin: 10px; /* Buitenruimte rond de links */
+    transition: background-color 0.2s ease-in-out, border-color 0.2s; /* Soepele overgang bij hover */
+    margin: 6px; /* Buitenruimte tussen links */
 }
 
-.navbar ul li:hover {
-    transform: translateY(-5px); /* Lichte optische lift bij hover */
+/* Hover-effect voor navigatielinks */
+.navbar .nav-links a:hover {
+    background-color: #e0e0e0; /* Lichtere achtergrond bij hover */
+    border-color: #999; /* Donkerdere rand bij hover */
 }
 
+/* Styling van de logout-link */
 .logout-link {
-    color: white; /* Witte tekstkleur */
-    cursor: pointer; /* Cursor verandert in handje */
-    margin-left: 15px; /* Ruimte ten opzichte van de vorige link */
-    text-decoration: underline; /* Onderstreept voor nadruk */
+    display: inline-block; /* Blokvormig gedrag */
+    border: var(--dark-grey); /* Randkleur via CSS-variabele */
+    border-radius: 8px; /* Afgeronde hoeken */
+    background-color: var(--dark-grey); /* Achtergrondkleur */
+    color: var(--green); /* Tekstkleur */
+    margin: 6px; /* Ruimte rondom de link */
+    padding: 8px 12px; /* Binnenruimte voor klikvlak */
+    cursor: pointer; /* Cursor wordt een handje bij hover */
+    text-decoration: none; /* Geen onderstreping */
 }
 
+/* Hover-effect voor logout-link */
 .logout-link:hover {
-    color: var(--green); /* Kleurverandering bij hover */
+    color: var(--green); /* Tekstkleur blijft groen bij hover */
 }
 
