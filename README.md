@@ -91,6 +91,6 @@ src/
 ```
 
 ---
-⚠️ In deze applicatie wordt gebruikgemaakt van de gratis demo API-key van TheSportsDB (v1). Hierdoor is de app direct te testen zonder extra configuratie. Er is bewust niet gekozen voor v2, omdat deze alleen toegankelijk is voor betalende gebruikers.
+⚠️ In deze applicatie wordt gebruikgemaakt van de gratis API-key van TheSportsDB (v1). Hierdoor is de app direct te testen zonder extra configuratie. Er is bewust niet gekozen voor v2, omdat deze alleen toegankelijk is voor betalende gebruikers.
 
 > Gemaakt als **Eindopdracht Frontend** Novi Hogeschool.
