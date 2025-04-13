@@ -58,7 +58,7 @@ Deze gebruikers kun je gebruiken om de applicatie te testen.
 - React (met `useState`, `useEffect`, routing via React Router)
 - TheSportsDB API
 - Custom styling met CSS
-- LocalStorage voor favorieten
+- LocalStorage voor favorieten teams
 - JWT-authenticatie
 
 ---
