@@ -28,7 +28,7 @@ const Register = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Api-Key': process.env.REACT_APP_API_KEY // API-key uit .env bestand
+                    'X-Api-Key': process.env.REACT_APP_API_KEY // API-key uit .env bestand waardoor deze beveiligd mee gestuurd wordt
                 },
                 body: JSON.stringify({
                     username,
