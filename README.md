@@ -91,27 +91,6 @@ src/
 ```
 
 ---
-🔑 API-sleutel instellen (TheSportsDB)
-Deze app gebruikt de TheSportsDB API om teaminformatie, wedstrijden en standen op te halen. Hiervoor heb je een (gratis) API key nodig.
-
-📌 Zo stel je de API-sleutel in:
-Ga naar https://www.thesportsdb.com
-
-1. Maak een account aan of log in
-
-2. Kopieer jouw persoonlijke API Key vanaf je profielpagina
-
-3. Maak in de root van je project een .env bestand aan (indien nog niet aanwezig)
-
-4. Voeg deze regel toe aan dat bestand:
-env:
-REACT_APP_SPORTS_API_KEY=jouweigenapikeyhier
-
-5. Sla op en (her)start je app met:
-npm start
-6. De API key wordt in de code gebruikt via:
-const API_KEY = process.env.REACT_APP_SPORTS_API_KEY;
-
-7. Let op: commit je .env bestand nooit mee naar GitHub. Dit bestand staat al in .gitignore, dus dat zit goed!
+⚠️ In deze applicatie wordt gebruikgemaakt van de gratis demo API-key van TheSportsDB (v1). Hierdoor is de app direct te testen zonder extra configuratie. Er is bewust niet gekozen voor v2, omdat deze alleen toegankelijk is voor betalende gebruikers.
 
 > Gemaakt als **Eindopdracht Frontend** Novi Hogeschool.
