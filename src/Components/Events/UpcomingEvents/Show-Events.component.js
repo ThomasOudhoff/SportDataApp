@@ -8,6 +8,7 @@ function UpcomingEvents({ events }) {
     }
 
     return (
+        // Hier worden de aankomende wedstrijden weergegeven
         <div className="eventList">
             {/* Doorloop alle evenementen */}
             {events.map((event) => {
