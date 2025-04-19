@@ -22,7 +22,6 @@ function TeamsDetails() {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     const leagueId = searchParams.get('leagueId');
-    console.log("leagueId:", leagueId);
 
     useEffect(() => {
         // Haal gegevens van het geselecteerde team op
