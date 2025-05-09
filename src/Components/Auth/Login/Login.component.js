@@ -1,82 +1,74 @@
-import React from 'react';
 import './Login.component.css';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../Contexts/AuthContext';
+import React, { useState } from 'react';
 
 const Login = () => {
+    const navigate = useNavigate(); // Voor navigatie naar andere pagina's
+    const { login } = useAuth(); // Haal de login-functie uit de context
+    const [error, setError] = useState(''); // Voor het tonen van foutmeldingen
 
-    // React Router hook om te kunnen navigeren
-    const navigate = useNavigate();
+    // Wordt uitgevoerd bij het indienen van het formulier
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-    // Functie die wordt uitgevoerd wanneer het formulier wordt verzonden
-    const handleSubmit = async(e) => {
-        e.preventDefault(); // Voorkom standaard formuliergedrag (pagina herladen)
+        const username = e.target.username.value; // Haal gebruikersnaam op
+        const password = e.target.password.value; // Haal wachtwoord op
 
-        // Haal gebruikersnaam en wachtwoord op uit de formulierinvoer
-        const username = e.target.username.value;
-        const password = e.target.password.value;
-
-        // Toon de ingevoerde gegevens in de console (voor debug)
         console.log('Inloggen met:', username, password);
 
         try {
-            // Verstuur inloggegevens naar de API
+            // Verstuur POST-request naar de login-API
             const response = await fetch('https://api.datavortex.nl/sportdataapp/users/authenticate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    'username': username,
-                    'password': password
-                }),
+                body: JSON.stringify({ username, password }),
             });
 
-            // Ontvang antwoord van de server
-            const data = await response.json();
-            console.log('Response:', data);
+            let data = {};
+            try {
+                data = await response.json();
+            } catch (err) {
+                console.warn('Response is geen geldige JSON:', err);
+            }
+
+            console.log('Statuscode:', response.status);
 
             if (response.ok) {
-                // Als inloggen gelukt is, sla de JWT-token op in localStorage
-                localStorage.setItem('JWT', data.jwt);
-                console.log('Inloggen geslaagd!');
-
-                // Navigeer naar de homepage
-                navigate("/");
+                login(data.jwt);
+                navigate('/');
+            } else if (response.status === 401 || response.status === 403) {
+                setError("Gebruikersnaam of wachtwoord is onjuist.");
             } else {
-                // Als de server een fout teruggeeft, toon een foutmelding in de console
-                console.error('Inloggen mislukt:', data.message);
-                // (Optioneel) toon fout aan gebruiker
+                setError(data.message || "Er is iets misgegaan. Probeer het opnieuw.");
             }
 
         } catch (error) {
-            // Fout bij het uitvoeren van de fetch-aanroep
+            // Bij netwerkfout of andere error
             console.error("Fout bij inloggen:", error);
+            setError("Fout bij verbinden met de server. Probeer het later opnieuw.");
         }
     };
 
     return (
         <div className="login_window">
+            {/* Foutmelding tonen indien aanwezig */}
+            {error && <p style={{ color: 'red' }}>{error}</p>}
+
             {/* Inlogformulier */}
             <form onSubmit={handleSubmit} className="search-form">
-
-                {/* (Optioneel) toon de huidige JWT uit localStorage */}
-                <div>
-                    {localStorage.getItem("JWT")}
-                </div>
-
-                {/* Gebruikersnaamveld */}
                 <div>
                     <label htmlFor="username">Username:</label>
-                    <input type="username" id="username" name="username" required />
+                    <input type="text" id="username" name="username" required />
                 </div>
 
-                {/* Wachtwoordveld */}
                 <div>
                     <label htmlFor="password">Password:</label>
                     <input type="password" id="password" name="password" required />
                 </div>
 
-                {/* Inlogknop */}
                 <button type="submit">Login</button>
             </form>
 
@@ -92,4 +84,5 @@ const Login = () => {
 };
 
 export default Login;
+
 

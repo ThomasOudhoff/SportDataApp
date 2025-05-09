@@ -1,61 +1,67 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../Contexts/AuthContext';
 
 const Register = () => {
-    const [error, setError] = useState(''); // State voor foutmeldingen
-    const navigate = useNavigate(); // Hook voor navigatie
+    const [error, setError] = useState(''); // State om foutmeldingen te tonen
+    const navigate = useNavigate(); // Hook om te navigeren naar andere routes
+    const { login } = useAuth(); // Haalt de login functie uit de context
 
-    // Wordt uitgevoerd bij verzenden van het registratieformulier
+    // Wordt uitgevoerd bij het verzenden van het registratieformulier
     const handleRegister = async (e) => {
-        e.preventDefault(); // Voorkom standaard formulieractie (pagina herladen)
+        e.preventDefault();
 
-        // Haal formulierwaarden op
+        // Haal de formulierwaarden op
         const username = e.target.username.value;
         const password = e.target.password.value;
-        const info = "testinfo"; // Extra info (placeholder)
+        const info = "testinfo"; // Extra info, hier hardcoded
         const email = e.target.email.value;
         const confirmEmail = e.target.confirmEmail.value;
 
-        // Check of e-mail en bevestiging overeenkomen
+        // Controleer of de e-mailvelden overeenkomen
         if (email !== confirmEmail) {
             setError("E-mailadressen komen niet overeen.");
             return;
         }
 
         try {
-            // Verstuur registratiegegevens naar de API
+            // Verstuur de registratiegegevens naar de API
             const response = await fetch('https://api.datavortex.nl/sportdataapp/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Api-Key': process.env.REACT_APP_API_KEY // API-key uit .env bestand
+                    'X-Api-Key': process.env.REACT_APP_API_KEY
                 },
-                body: JSON.stringify({
-                    username,
-                    email,
-                    password,
-                    info
-                }),
+                body: JSON.stringify({ username, email, password, info }),
             });
 
+            // Probeer de JSON te parsen (werkt mogelijk niet bij foutstatus)
+            let data = {};
+            try {
+                data = await response.json();
+            } catch (jsonErr) {
+                console.warn('Response is geen geldige JSON:', jsonErr);
+            }
+
+            // Als registratie succesvol is
             if (response.ok) {
                 console.log("Registratie geslaagd!");
-                // Stuur gebruiker door naar loginpagina
-                navigate("/auth/login");
-            } else {
-                // Specifieke fout: e-mail of gebruikersnaam al in gebruik
-                if (response.status === 409) {
-                    setError("E-mail of gebruiksnaam is al in gebruik");
-                } else {
-                    // Algemene foutmelding
-                    setError("Registratie mislukt. Probeer het opnieuw.");
-                }
+                login(data.jwt); // Automatisch inloggen na registratie
+                navigate("/"); // Ga naar de homepage
+            }
+            // Als e-mail of gebruikersnaam al bestaat (409 status)
+            else if (response.status === 409) {
+                setError("E-mailadres of gebruikersnaam is al in gebruik.");
+            }
+            // Andere foutstatus van de server
+            else {
+                setError(data.message || "Registratie mislukt. Probeer het opnieuw.");
             }
 
         } catch (err) {
-            // Fout tijdens netwerkverzoek of fetch
+            // Fout bij netwerkverzoek of server niet bereikbaar
             console.error("Error tijdens registratie:", err);
-            setError("Er ging iets mis. Probeer later opnieuw.");
+            setError("Fout bij verbinden met de server. Probeer het later opnieuw.");
         }
     };
 
@@ -66,7 +72,7 @@ const Register = () => {
                 <h2>Registreren</h2>
 
                 {/* Toon foutmelding indien aanwezig */}
-                {error && <p style={{color: 'red'}}>{error}</p>}
+                {error && <p style={{ color: 'red' }}>{error}</p>}
 
                 <div>
                     <label htmlFor="username">Gebruikersnaam:</label>
@@ -91,16 +97,15 @@ const Register = () => {
                 <button type="submit">Account aanmaken</button>
             </form>
 
-            {/* Link terug naar login */}
+            {/* Link terug naar loginpagina */}
             <div className="register-link">
                 <p>Heb je al een account?</p>
-                <button type="button" onClick={() => navigate("/auth/login")}>
-                    Terug naar login
-                </button>
+                <button type="button" onClick={() => navigate("/auth/login")}>Terug naar login</button>
             </div>
         </div>
     );
 };
 
 export default Register;
+
 
