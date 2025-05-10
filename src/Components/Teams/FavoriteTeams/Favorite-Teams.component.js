@@ -1,4 +1,4 @@
-// src/Components/FavoriteTeams/Favorite-Teams.component.js
+
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import "./Favorite-Teams.component.css";
