@@ -30,8 +30,6 @@ const Register = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Api-Key': process.env.REACT_APP_API_KEY
-                },
                 body: JSON.stringify({ username, email, password, info }),
             });
 
