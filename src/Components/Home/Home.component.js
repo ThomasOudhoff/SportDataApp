@@ -17,7 +17,7 @@ function HomeComponent() {
     // Haal alle competities op bij het laden van de pagina
     useEffect(() => {
         const fetchLeagues = async () => {
-            const res = await fetch("https://www.thesportsdb.com/api/v1/json/3/all_leagues.php");
+            const res = await fetch("https://api.allorigins.win/raw?url=https://www.thesportsdb.com/api/v1/json/3/all_leagues.php");
             const data = await res.json();
             setLeagues(data.leagues);
 
