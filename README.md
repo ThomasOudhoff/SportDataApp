@@ -58,10 +58,15 @@ Deze gebruikers kun je gebruiken om de applicatie te testen.
 - React (met `useState`, `useEffect`, routing via React Router)
 - TheSportsDB API
 - Custom styling met CSS
-- LocalStorage voor favorieten
+- LocalStorage voor favorieten teams
 - JWT-authenticatie
 
 ---
+🌐 Fetchstrategie
+
+Voor het ophalen van alle competities (all_leagues.php) wordt gebruikgemaakt van een CORS-proxy via AllOrigins vanwege CORS-beperkingen op deze specifieke endpoint.
+
+Andere API-aanroepen verlopen rechtstreeks via TheSportsDB API.
 
 ## 💡 Overige scripts
 
@@ -90,7 +95,5 @@ src/
 ├── index.js
 ```
 
----
-⚠️ In deze applicatie wordt gebruikgemaakt van de gratis API-key van TheSportsDB (v1). Hierdoor is de app direct te testen zonder extra configuratie. Er is bewust niet gekozen voor v2, omdat deze alleen toegankelijk is voor betalende gebruikers.
 
 > Gemaakt als **Eindopdracht Frontend** Novi Hogeschool.
