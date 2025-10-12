@@ -15,19 +15,29 @@ function FavoriteTeams() {
         const fetchData = async () => {
             try {
                 const resultPromises = storedFavorites.map(async (teamId) => {
-                    const res = await fetch(`https://www.thesportsdb.com/api/v1/json/3/eventslast.php?id=${teamId}`);
-                    const data = await res.json();
-                    return { teamId, results: data.results || [] };
+                    try {
+                        const res = await fetch(`https://www.thesportsdb.com/api/v1/json/3/eventslast.php?id=${teamId}`);
+                        const data = await res.json();
+                        return { teamId, results: data.results || [] };
+                    } catch (error) {
+                        console.error(`Fout bij ophalen van resultaten voor team ID ${teamId}:`, error);
+                        return { teamId, results: [] };
+                    }
                 });
 
                 const detailPromises = storedFavorites.map(async (teamId) => {
-                    const res = await fetch(`https://www.thesportsdb.com/api/v1/json/3/lookupteam.php?id=${teamId}`);
-                    const data = await res.json();
-                    const team = data.teams?.[0];
-                    return {
-                        teamId,
-                        details: team ? { name: team.strTeam, logo: team.strBadge } : null
-                    };
+                    try {
+                        const res = await fetch(`https://www.thesportsdb.com/api/v1/json/3/lookupteam.php?id=${teamId}`);
+                        const data = await res.json();
+                        const team = data.teams?.[0];
+                        return {
+                            teamId,
+                            details: team ? { name: team.strTeam, logo: team.strBadge } : null
+                        };
+                    } catch (error) {
+                        console.error(`Fout bij ophalen van details voor team ID ${teamId}:`, error);
+                        return { teamId, details: null };
+                    }
                 });
 
 
@@ -88,7 +98,7 @@ function FavoriteTeams() {
         <div className="pageLayout favorites-layout">
             <div className="leftPanel favorites-panel">
                 <h1>Mijn Favoriete Teams</h1>
-                <div className="favorites-wrapper">
+                <ul className="favorites-wrapper">
                     {favoriteTeams.length === 0 ? (
                         <p>
                             Je hebt nog geen favoriete teams toegevoegd.{" "}
@@ -97,16 +107,21 @@ function FavoriteTeams() {
                         </p>
                     ) : (
                         favoriteTeams.map((teamId) => (
-                            <div key={teamId} className="team-row">
+
+                            <li key={teamId} className="team-row">
                                 <div className="team-left">
                                     <img
                                         src={teamDetails[teamId]?.logo}
                                         alt={teamDetails[teamId]?.name}
                                         className="team-logo"
                                     />
-                                    <Link to={`/teams/${teamId}`} className="team-name">
-                                        {teamDetails[teamId]?.name}
-                                    </Link>
+                                    {teamDetails[teamId] == undefined ? (
+                                        <p>Kon team niet laden...</p>
+                                    ) : (
+                                        <Link to={`/teams/${teamId}`} className="team-name">
+                                            {teamDetails[teamId]?.name}
+                                        </Link>
+                                    )}
                                 </div>
                                 <div className="form">
                                     {getForm(teamId).map((result, idx) => (
@@ -120,10 +135,11 @@ function FavoriteTeams() {
                                     title="Verwijder uit favorieten"
                                     onClick={() => handleRemoveFavorite(teamId, teamDetails[teamId]?.name)}
                                 ></i>
-                            </div>
+                            </li>
+
                         ))
                     )}
-                </div>
+                </ul>
             </div>
         </div>
     );

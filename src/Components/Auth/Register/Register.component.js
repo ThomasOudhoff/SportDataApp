@@ -51,6 +51,7 @@ const Register = () => {
             }
             // Als e-mail of gebruikersnaam al bestaat (409 status)
             else if (response.status === 409) {
+                console.log("RESS", response) /* PROBLEEM - Dubbele 409 op wachtwoord onjuist en email/username in gebruik */
                 setError("E-mailadres of gebruikersnaam is al in gebruik.");
             }
             // Andere foutstatus van de server
@@ -72,7 +73,7 @@ const Register = () => {
                 <h2>Registreren</h2>
 
                 {/* Toon foutmelding indien aanwezig */}
-                {error && <p style={{ color: 'red' }}>{error}</p>}
+                {error && <p className='text-red'>{error}</p>}
 
                 <div>
                     <label htmlFor="username">Gebruikersnaam:</label>

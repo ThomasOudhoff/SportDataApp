@@ -1,0 +1,20 @@
+.season-selector {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.season-selector__label {
+    font-size: 0.85rem;
+    color: var(--dark-grey);
+}
+
+.season-selector__select {
+    padding: 6px 10px;
+    border: 1px solid var(--green);
+    border-radius: 4px;
+    background-color: var(--dark-green);
+    color: var(--dark-grey);
+    font-size: 0.9rem;
+    height: 36px;
+}

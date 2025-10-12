@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../SearchBar/SearchBar.component.css';
+import Button from '../ComponentHelpers/Button/Button.component';
 
 const SearchBar = ({ onSearch }) => {
     // State om de zoekopdracht (inputveld) bij te houden
@@ -12,7 +13,7 @@ const SearchBar = ({ onSearch }) => {
 
     // Wordt uitgevoerd bij het verzenden van het formulier
     const handleSubmit = (e) => {
-        e.preventDefault(); // Voorkom dat de pagina herlaadt
+        e?.preventDefault(); // Voorkom dat de pagina herlaadt
         onSearch(query);    // Roep de onSearch-functie aan met de ingevulde zoekterm
     };
 
@@ -28,9 +29,7 @@ const SearchBar = ({ onSearch }) => {
             />
 
             {/* Knop om zoekopdracht uit te voeren */}
-            <button type="submit" className="search-button">
-                Zoeken
-            </button>
+            <Button clickButton={() => {}} text="Zoeken" type="submit" />
         </form>
     );
 };

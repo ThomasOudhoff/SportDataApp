@@ -1,11 +1,16 @@
+.league_wrapper {
+    list-style: none; /* Verwijder standaard lijststijl */
+    padding-left: 0; /* Verwijder standaard padding */
+}
+
 .league_item {
     margin-top: 2px; /* Ruimte boven het item */
     margin-bottom: 2px; /* Ruimte onder het item */
     padding: 2px 5px; /* Binnenruimte rondom de tekst */
+    transition: 0.1s linear all;
 }
-
 .league_item:hover {
-    background-color: var(--green); /* Groene achtergrond bij hover */
-    color: var(--dark-grey); /* Donkergrijze tekstkleur bij hover */
+    background-color: var(--dark-grey); /* Groene achtergrond bij hover */
+    color: var(--green); /* Donkergrijze tekstkleur bij hover */
     cursor: pointer; /* Cursor verandert in een handje */
 }

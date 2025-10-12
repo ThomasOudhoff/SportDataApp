@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './League-table.component.css';
 import UpcomingEvents from '../Events/UpcomingEvents/Show-Events.component';
 import { useNavigate } from 'react-router-dom';
+import SeasonSelector from "../ComponentHelpers/SeasonSelect/SeasonSelect.component";
 
 function LeagueTable({ league }) {
     const currentYear = new Date().getFullYear();
@@ -70,9 +71,10 @@ function LeagueTable({ league }) {
         fetchEvents();
     }, [league, activeTab]);
 
+    console.log('Aantal teams:', standings.length); //tijdens inleveren waren dit er nog meer, maar de API is veranderd.
     return (
         <div>
-            {/* Tabs om te wisselen tussen 'stand' en 'volgende wedstrijden' */}
+            {/* Tabs */}
             <div className="tab-selector">
                 <button
                     className={activeTab === "stand" ? "active" : ""}
@@ -88,37 +90,26 @@ function LeagueTable({ league }) {
                 </button>
             </div>
 
-            {/* Weergave van ranglijst als 'stand' actief is */}
+            {/* STAND-tab */}
             {activeTab === "stand" && (
                 <>
-                    {/* Seizoenselectie en knop om naar teampagina te gaan */}
+                    {/* Seizoenselectie + knop */}
                     <div className="season-bar">
-                        <div className="season-selector">
-                            <select
-                                value={selectedSeason}
-                                onChange={(e) => setSelectedSeason(e.target.value)}
-                            >
-                                {Array.from({ length: 11 }, (_, i) => {
-                                    const start = currentYear - 1 - i;
-                                    const end = start + 1;
-                                    const season = `${start}-${end}`;
-                                    return (
-                                        <option key={season} value={season}>
-                                            {season}
-                                        </option>
-                                    );
-                                })}
-                            </select>
-                        </div>
+                        <SeasonSelector
+                            value={selectedSeason}
+                            onChange={setSelectedSeason}
+                            yearsBack={10}
+                        />
+
                         <button
                             className="view-teams-button"
-                            onClick={() => navigate(`/teams?leagueId=${league.strLeague}`)}
+                            onClick={() => navigate(`/teams?leagueId=${league.idLeague}`)}
                         >
                             Bekijk alle teams
                         </button>
                     </div>
 
-                    {/* Toon stand of melding indien leeg */}
+                    {/* Stand of melding */}
                     {loading ? (
                         <p>Stand wordt geladen...</p>
                     ) : standings.length > 0 ? (
@@ -155,18 +146,17 @@ function LeagueTable({ league }) {
                 </>
             )}
 
-            {/* Weergave van aankomende wedstrijden als 'events' actief is */}
+            {/* EVENTS-tab */}
             {activeTab === "events" && (
                 <>
                     {loading ? (
                         <p>Evenementen worden geladen...</p>
                     ) : (
-                        <UpcomingEvents events={events} />
+                        <UpcomingEvents events={events}/>
                     )}
                 </>
             )}
         </div>
     );
 }
-
 export default LeagueTable;

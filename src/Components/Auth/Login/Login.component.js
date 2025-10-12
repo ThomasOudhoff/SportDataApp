@@ -2,6 +2,7 @@ import './Login.component.css';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../Contexts/AuthContext';
 import React, { useState } from 'react';
+import Button from '../../ComponentHelpers/Button/Button.component';
 
 const Login = () => {
     const navigate = useNavigate(); // Voor navigatie naar andere pagina's
@@ -10,8 +11,8 @@ const Login = () => {
 
     // Wordt uitgevoerd bij het indienen van het formulier
     const handleSubmit = async (e) => {
-        e.preventDefault();
-
+        e.preventDefault(); // Voorkom dat de pagina herlaadt
+        
         const username = e.target.username.value; // Haal gebruikersnaam op
         const password = e.target.password.value; // Haal wachtwoord op
 
@@ -55,10 +56,10 @@ const Login = () => {
     return (
         <div className="login_window">
             {/* Foutmelding tonen indien aanwezig */}
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <p className="text-red">{error}</p>}
 
             {/* Inlogformulier */}
-            <form onSubmit={handleSubmit} className="search-form">
+            <form className="search-form" onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="username">Username:</label>
                     <input type="text" id="username" name="username" required />
@@ -69,7 +70,7 @@ const Login = () => {
                     <input type="password" id="password" name="password" required />
                 </div>
 
-                <button type="submit">Login</button>
+                <Button clickButton={() => {}} text="Login" type="submit" />
             </form>
 
             {/* Link naar registratiepagina */}

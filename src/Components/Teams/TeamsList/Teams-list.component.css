@@ -2,7 +2,6 @@
 body {
     background-color: var(--dark-grey);
     margin: 0;
-    font-family: Arial, sans-serif;
 }
 
 /* Container voor het tonen van teamkaarten */

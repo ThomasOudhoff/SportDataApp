@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "./Home.component.css";
-import LeaguesList from "../Leagues/Leagues-list.component";
-import SearchBar from '../SearchBar/SearchBar.component';
+import LeaguesList from "../Leagues/Leagues-list.component.js";
+import SearchBar from '../SearchBar/SearchBar.component.js';
 import LeagueTable from '../Leagues/League-table.component.js';
 
 function HomeComponent() {

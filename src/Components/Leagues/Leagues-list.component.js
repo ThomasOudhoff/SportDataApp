@@ -29,18 +29,18 @@ function LeaguesList({ searchQuery, selectedLeague, onSelectLeague }) {
     );
 
     return (
-        <div className="league_wrapper mt-2">
+        <ul className="league_wrapper mt-2">
             {/* Toon alle gefilterde competities als klikbare items */}
             {filteredLeagues.map((league) => (
-                <div
+                <li
                     key={league.idLeague}
                     className={`league_item ${selectedLeague?.idLeague === league.idLeague ? 'active' : ''}`}
                     onClick={() => onSelectLeague(league)}
                 >
                     {league.strLeague}
-                </div>
+                </li>
             ))}
-        </div>
+        </ul>
     );
 }
 

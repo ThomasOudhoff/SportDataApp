@@ -8,45 +8,60 @@ html {
   background-color: var(--dark-grey); /* Achtergrondkleur voor hele pagina */
 }
 
-.App {
-  text-align: center;
-  background-color: var(--dark-grey);
-  color: var(--dark-grey);
+/* CSS Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  margin: 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear; /* Draaiende logo-animatie */
+  html {
+    interpolate-size: allow-keywords;
   }
 }
 
-.App-header {
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+#root, #__next {
+  isolation: isolate;
+}
+
+@font-face {
+  font-family: "Raleway";
+  src: url("./assets/Raleway-VariableFont_wght.ttf") format("truetype");
+}
+
+
+.App {
+  font-family: Raleway, Tahoma, Geneva, Verdana, sans-serif; /* Typografie */
+  text-align: center;
   background-color: var(--dark-grey);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin); /* Responsieve tekstgrootte */
   color: var(--dark-grey);
-}
-
-.App-link {
-  color: #61dafb; /* Standaard React linkkleur */
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 /* Grid layout met 3/1 verhouding */
@@ -93,5 +108,8 @@ html {
 /* Tekst links uitlijnen */
 .text-start {
   text-align: left;
+}
+.text-red {
+  color: red;
 }
 
