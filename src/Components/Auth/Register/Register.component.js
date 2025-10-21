@@ -25,40 +25,30 @@ const Register = () => {
         }
 
         try {
-            // Verstuur de registratiegegevens naar de API
             const response = await fetch('https://api.datavortex.nl/sportdataapp/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                },
                 body: JSON.stringify({ username, email, password, info }),
             });
 
-            // Probeer de JSON te parsen (werkt mogelijk niet bij foutstatus)
             let data = {};
             try {
                 data = await response.json();
-            } catch (jsonErr) {
-                console.warn('Response is geen geldige JSON:', jsonErr);
-            }
+            } catch {}
 
-            // Als registratie succesvol is
             if (response.ok) {
                 console.log("Registratie geslaagd!");
-                login(data.jwt); // Automatisch inloggen na registratie
-                navigate("/"); // Ga naar de homepage
-            }
-            // Als e-mail of gebruikersnaam al bestaat (409 status)
-            else if (response.status === 409) {
-                console.log("RESS", response) /* PROBLEEM - Dubbele 409 op wachtwoord onjuist en email/username in gebruik */
+                login(data.jwt);
+                navigate("/");
+            } else if (response.status === 409) {
+                console.log("RESS", response);
                 setError("E-mailadres of gebruikersnaam is al in gebruik.");
-            }
-            // Andere foutstatus van de server
-            else {
+            } else {
                 setError(data.message || "Registratie mislukt. Probeer het opnieuw.");
             }
-
         } catch (err) {
-            // Fout bij netwerkverzoek of server niet bereikbaar
             console.error("Error tijdens registratie:", err);
             setError("Fout bij verbinden met de server. Probeer het later opnieuw.");
         }
