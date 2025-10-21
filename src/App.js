@@ -11,7 +11,7 @@ import RegisterComponent from "./Components/Auth/Register/Register.component";
 import TeamsList from "./Components/Teams/TeamsList/Teams-list.component.js";
 import FavoriteTeams from './Components/Teams/FavoriteTeams/Favorite-Teams.component';
 import ProtectedRoute from './Components/Auth/ProtectedRoute'; // Beveiligde route-wrapper
-
+//comment zodat ik nieuwe versie kan commiten
 
 
 function App() {
