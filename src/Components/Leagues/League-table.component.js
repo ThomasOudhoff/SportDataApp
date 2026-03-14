@@ -7,25 +7,14 @@ import SeasonSelector from "../ComponentHelpers/SeasonSelect/SeasonSelect.compon
 function LeagueTable({ league }) {
     const currentYear = new Date().getFullYear();
     const latestSeason = `${currentYear - 1}-${currentYear}`;
-
-    // Geselecteerd seizoen
     const [selectedSeason, setSelectedSeason] = useState(latestSeason);
-
-    // Ranglijstgegevens van het geselecteerde seizoen
     const [standings, setStandings] = useState([]);
-
-    // Aankomende wedstrijden
     const [events, setEvents] = useState([]);
-
-    // Laadstatus (true tijdens API-oproepen)
     const [loading, setLoading] = useState(false);
-
-    // Actieve tab: 'stand' of 'events'
     const [activeTab, setActiveTab] = useState("stand");
 
     const navigate = useNavigate();
 
-    // Ophalen van ranglijst bij wijziging van competitie, seizoen of tab
     useEffect(() => {
         if (activeTab !== "stand" || !league?.idLeague) return;
 
@@ -33,12 +22,12 @@ function LeagueTable({ league }) {
             setLoading(true);
             try {
                 const res = await fetch(
-                    `https://www.thesportsdb.com/api/v1/json/3/lookuptable.php?l=${league.idLeague}&s=${selectedSeason}`
+                    `/api/v1/json/3/lookuptable.php?l=${league.idLeague}&s=${selectedSeason}`
                 );
                 const data = await res.json();
                 setStandings(data.table || []);
             } catch (error) {
-                console.error("Fout bij ophalen van ranglijst:", error);
+                console.error(error);
                 setStandings([]);
             } finally {
                 setLoading(false);
@@ -48,7 +37,6 @@ function LeagueTable({ league }) {
         fetchTable();
     }, [league, selectedSeason, activeTab]);
 
-    // Ophalen van aankomende wedstrijden bij wijziging van competitie of tab
     useEffect(() => {
         if (activeTab !== "events" || !league?.idLeague) return;
 
@@ -56,12 +44,12 @@ function LeagueTable({ league }) {
             setLoading(true);
             try {
                 const res = await fetch(
-                    `https://www.thesportsdb.com/api/v1/json/3/eventsnextleague.php?id=${league.idLeague}`
+                    `/api/v1/json/3/eventsnextleague.php?id=${league.idLeague}`
                 );
                 const data = await res.json();
                 setEvents(data.events || []);
             } catch (error) {
-                console.error("Fout bij ophalen van evenementen:", error);
+                console.error(error);
                 setEvents([]);
             } finally {
                 setLoading(false);
@@ -71,10 +59,8 @@ function LeagueTable({ league }) {
         fetchEvents();
     }, [league, activeTab]);
 
-    console.log('Aantal teams:', standings.length); //tijdens inleveren waren dit er nog meer, maar de API is veranderd.
     return (
         <div>
-            {/* Tabs */}
             <div className="tab-selector">
                 <button
                     className={activeTab === "stand" ? "active" : ""}
@@ -89,11 +75,8 @@ function LeagueTable({ league }) {
                     Volgende wedstrijden
                 </button>
             </div>
-
-            {/* STAND-tab */}
             {activeTab === "stand" && (
                 <>
-                    {/* Seizoenselectie + knop */}
                     <div className="season-bar">
                         <SeasonSelector
                             value={selectedSeason}
@@ -108,8 +91,6 @@ function LeagueTable({ league }) {
                             Bekijk alle teams
                         </button>
                     </div>
-
-                    {/* Stand of melding */}
                     {loading ? (
                         <p>Stand wordt geladen...</p>
                     ) : standings.length > 0 ? (
@@ -145,8 +126,6 @@ function LeagueTable({ league }) {
                     )}
                 </>
             )}
-
-            {/* EVENTS-tab */}
             {activeTab === "events" && (
                 <>
                     {loading ? (

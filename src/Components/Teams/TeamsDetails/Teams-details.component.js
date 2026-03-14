@@ -17,7 +17,7 @@ function TeamsDetails() {
     useEffect(() => {
         const fetchTeam = async () => {
             try {
-                const response = await fetch(`https://www.thesportsdb.com/api/v1/json/3/lookupteam.php?id=${id}`);
+                const response = await fetch(`/api/v1/json/3/lookupteam.php?id=${id}`);
                 const data = await response.json();
                 const teamData = data.teams[0];
 
@@ -34,26 +34,23 @@ function TeamsDetails() {
                     ig: teamData.strInstagram,
                 });
             } catch (error) {
-                console.error("Fout bij ophalen van teamgegevens:", error);
+                console.error(error);
             }
         };
 
         const fetchEvents = async () => {
             try {
                 const [nextRes, lastRes] = await Promise.all([
-                    fetch(`https://www.thesportsdb.com/api/v1/json/3/eventsnext.php?id=${id}`),
-                    fetch(`https://www.thesportsdb.com/api/v1/json/3/eventslast.php?id=${id}`)
+                    fetch(`/api/v1/json/3/eventsnext.php?id=${id}`),
+                    fetch(`/api/v1/json/3/eventslast.php?id=${id}`)
                 ]);
                 const nextData = await nextRes.json();
                 const lastData = await lastRes.json();
 
-                console.log("Aankomende wedstrijden:", nextData);
-                console.log("Afgelopen wedstrijden:", lastData);
-
                 setUpcomingEvents(nextData.events || []);
                 setPastEvents(lastData.results || []);
             } catch (error) {
-                console.error("Fout bij ophalen van wedstrijden:", error);
+                console.error(error);
             }
         };
 

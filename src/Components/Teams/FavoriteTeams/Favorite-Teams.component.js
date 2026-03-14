@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import "./Favorite-Teams.component.css";
@@ -16,18 +15,17 @@ function FavoriteTeams() {
             try {
                 const resultPromises = storedFavorites.map(async (teamId) => {
                     try {
-                        const res = await fetch(`https://www.thesportsdb.com/api/v1/json/3/eventslast.php?id=${teamId}`);
+                        const res = await fetch(`/api/v1/json/3/eventslast.php?id=${teamId}`);
                         const data = await res.json();
                         return { teamId, results: data.results || [] };
                     } catch (error) {
-                        console.error(`Fout bij ophalen van resultaten voor team ID ${teamId}:`, error);
                         return { teamId, results: [] };
                     }
                 });
 
                 const detailPromises = storedFavorites.map(async (teamId) => {
                     try {
-                        const res = await fetch(`https://www.thesportsdb.com/api/v1/json/3/lookupteam.php?id=${teamId}`);
+                        const res = await fetch(`/api/v1/json/3/lookupteam.php?id=${teamId}`);
                         const data = await res.json();
                         const team = data.teams?.[0];
                         return {
@@ -35,11 +33,9 @@ function FavoriteTeams() {
                             details: team ? { name: team.strTeam, logo: team.strBadge } : null
                         };
                     } catch (error) {
-                        console.error(`Fout bij ophalen van details voor team ID ${teamId}:`, error);
                         return { teamId, details: null };
                     }
                 });
-
 
                 const resultResponses = await Promise.all(resultPromises);
                 const detailResponses = await Promise.all(detailPromises);
@@ -60,7 +56,7 @@ function FavoriteTeams() {
                 setResults(allResults);
                 setTeamDetails(allDetails);
             } catch (err) {
-                console.error("Fout bij ophalen data:", err);
+                console.error(err);
             }
         };
 
@@ -107,7 +103,6 @@ function FavoriteTeams() {
                         </p>
                     ) : (
                         favoriteTeams.map((teamId) => (
-
                             <li key={teamId} className="team-row">
                                 <div className="team-left">
                                     <img
@@ -115,7 +110,7 @@ function FavoriteTeams() {
                                         alt={teamDetails[teamId]?.name}
                                         className="team-logo"
                                     />
-                                    {teamDetails[teamId] == undefined ? (
+                                    {teamDetails[teamId] === undefined ? (
                                         <p>Kon team niet laden...</p>
                                     ) : (
                                         <Link to={`/teams/${teamId}`} className="team-name">
@@ -136,7 +131,6 @@ function FavoriteTeams() {
                                     onClick={() => handleRemoveFavorite(teamId, teamDetails[teamId]?.name)}
                                 ></i>
                             </li>
-
                         ))
                     )}
                 </ul>
@@ -146,7 +140,6 @@ function FavoriteTeams() {
 }
 
 export default FavoriteTeams;
-
 
 
 

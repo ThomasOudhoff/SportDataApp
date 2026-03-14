@@ -5,25 +5,23 @@ import React, { useState } from 'react';
 import Button from '../../ComponentHelpers/Button/Button.component';
 
 const Login = () => {
-    const navigate = useNavigate(); // Voor navigatie naar andere pagina's
-    const { login } = useAuth(); // Haal de login-functie uit de context
-    const [error, setError] = useState(''); // Voor het tonen van foutmeldingen
+    const navigate = useNavigate();
+    const { login } = useAuth();
+    const [error, setError] = useState('');
 
-    // Wordt uitgevoerd bij het indienen van het formulier
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Voorkom dat de pagina herlaadt
-        
-        const username = e.target.username.value; // Haal gebruikersnaam op
-        const password = e.target.password.value; // Haal wachtwoord op
+        e.preventDefault();
+        const username = e.target.username.value;
+        const password = e.target.password.value;
 
-        console.log('Inloggen met:', username, password);
+        const baseUrl = 'https://api.datavortex.nl/sportdataapp';
 
         try {
-            // Verstuur POST-request naar de login-API
-            const response = await fetch('https://api.datavortex.nl/sportdataapp/users/authenticate', {
+            const response = await fetch(`${baseUrl}/users/authenticate`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'X-Api-Key': process.env.REACT_APP_API_KEY
                 },
                 body: JSON.stringify({ username, password }),
             });
@@ -31,11 +29,7 @@ const Login = () => {
             let data = {};
             try {
                 data = await response.json();
-            } catch (err) {
-                console.warn('Response is geen geldige JSON:', err);
-            }
-
-            console.log('Statuscode:', response.status);
+            } catch (err) {}
 
             if (response.ok) {
                 login(data.jwt);
@@ -45,38 +39,28 @@ const Login = () => {
             } else {
                 setError(data.message || "Er is iets misgegaan. Probeer het opnieuw.");
             }
-
         } catch (error) {
-            // Bij netwerkfout of andere error
-            console.error("Fout bij inloggen:", error);
             setError("Fout bij verbinden met de server. Probeer het later opnieuw.");
         }
     };
 
     return (
         <div className="login_window">
-            {/* Foutmelding tonen indien aanwezig */}
             {error && <p className="text-red">{error}</p>}
-
-            {/* Inlogformulier */}
             <form className="search-form" onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="username">Username:</label>
                     <input type="text" id="username" name="username" required />
                 </div>
-
                 <div>
                     <label htmlFor="password">Password:</label>
                     <input type="password" id="password" name="password" required />
                 </div>
-
                 <Button clickButton={() => {}} text="Login" type="submit" />
             </form>
-
-            {/* Link naar registratiepagina */}
             <div className="register-link">
                 <p>Nog geen account?</p>
-                <button type="button" onClick={() => window.location.href = '/auth/register'}>
+                <button type="button" onClick={() => navigate('/auth/register')}>
                     Registreren
                 </button>
             </div>

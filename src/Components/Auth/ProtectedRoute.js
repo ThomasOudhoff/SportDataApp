@@ -2,24 +2,27 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
-
 const ProtectedRoute = ({ children }) => {
     const token = localStorage.getItem('JWT');
 
-    // Check of token bestaat en grofweg juist opgebouwd is (3 delen)
     if (!token || token.split('.').length !== 3) {
-        console.warn('Geen geldig JWT-token gevonden.');
-        return <Navigate to="/auth/login" />;
+        return <Navigate to="/auth/login" replace />;
     }
 
     try {
         const decoded = jwtDecode(token);
-        // (optioneel) controleer vervaldatum of andere claims hier
-        return children; // gebruiker mag door
+        const currentTime = Date.now() / 1000;
+
+        if (decoded.exp && decoded.exp < currentTime) {
+            localStorage.removeItem('JWT');
+            return <Navigate to="/auth/login" replace />;
+        }
+
+        return children;
     } catch (error) {
-        console.error('Fout bij decoderen van JWT:', error);
-        return <Navigate to="/auth/login" />;
+        localStorage.removeItem('JWT');
+        return <Navigate to="/auth/login" replace />;
     }
 };
 
-export default ProtectedRoute;
+export default ProtectedRoute;;
