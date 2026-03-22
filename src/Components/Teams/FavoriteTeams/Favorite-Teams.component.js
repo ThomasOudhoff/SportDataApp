@@ -1,67 +1,59 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
+import axios from 'axios'; // Importeer Axios
 import { useAuth } from "../../../Contexts/AuthContext";
 import "./Favorite-Teams.component.css";
-import axios from "axios";
 
 function FavoriteTeams() {
     const { favorites, toggleFavorite } = useAuth();
     const [results, setResults] = useState({});
     const [teamDetails, setTeamDetails] = useState({});
-    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchSportsDbData = async (teamIds) => {
             try {
-                setError(null);
-                const resultPromises = teamIds.map(async (teamId) => {
-                    try {
-                        const res = await axios.get(`/api/v1/json/3/eventslast.php?id=${teamId}`);
-                        return { teamId, results: res.data.results || [] };
-                    } catch (err) {
-                        return { teamId, results: [] };
-                    }
-                });
-
                 const detailPromises = teamIds.map(async (teamId) => {
                     try {
-                        const res = await axios.get(`/api/v1/json/3/lookupteam.php?id=${teamId}`);
-                        const team = res.data.teams?.[0];
+                        const response = await axios.get(`https://www.thesportsdb.com/api/v1/json/3/lookupteam.php?id=${teamId}`);
+                        const team = response.data.teams?.[0];
                         return {
                             teamId,
                             details: team ? { name: team.strTeam, logo: team.strBadge } : null
                         };
-                    } catch (err) {
+                    } catch (error) {
                         return { teamId, details: null };
                     }
                 });
 
-                const [resultResponses, detailResponses] = await Promise.all([
-                    Promise.all(resultPromises),
-                    Promise.all(detailPromises)
+                const resultPromises = teamIds.map(async (teamId) => {
+                    try {
+                        const response = await axios.get(`https://www.thesportsdb.com/api/v1/json/3/eventslast.php?id=${teamId}`);
+                        return { teamId, results: response.data.results || [] };
+                    } catch (error) {
+                        return { teamId, results: [] };
+                    }
+                });
+
+                const [detailResponses, resultResponses] = await Promise.all([
+                    Promise.all(detailPromises),
+                    Promise.all(resultPromises)
                 ]);
 
-                const allResults = {};
                 const allDetails = {};
+                const allResults = {};
+
+                detailResponses.forEach(({ teamId, details }) => {
+                    if (details) allDetails[teamId] = details;
+                });
 
                 resultResponses.forEach(({ teamId, results }) => {
                     allResults[teamId] = results;
                 });
 
-                detailResponses.forEach(({ teamId, details }) => {
-                    if (details) {
-                        allDetails[teamId] = details;
-                    }
-                });
-
-                setResults(allResults);
                 setTeamDetails(allDetails);
+                setResults(allResults);
             } catch (err) {
-                if (err.response && err.response.status === 429) {
-                    setError("Te veel verzoeken. Wacht even een minuutje.");
-                } else {
-                    setError("Fout bij ophalen van favoriete teams.");
-                }
+                console.error("Fout bij ophalen SportsDB data met Axios:", err);
             }
         };
 
@@ -89,12 +81,10 @@ function FavoriteTeams() {
     const handleRemoveFavorite = (teamId, teamName) => {
         const confirm = window.confirm(`Weet je zeker dat je ${teamName} wilt verwijderen?`);
         if (confirm) {
-            toggleFavorite({ id: teamId });
+            toggleFavorite(teamId);
         }
     };
 
-    if (error) return <section className="error-container"><p>{error}</p></section>;
-    if (!favorites || favorites.length === 0) return <section><p>Je hebt nog geen favoriete teams.</p></section>;
     return (
         <div className="pageLayout favorites-layout">
             <div className="leftPanel favorites-panel">
