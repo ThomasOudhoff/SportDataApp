@@ -3,40 +3,47 @@ import './Show-Events.component.css';
 
 function UpcomingEvents({ events }) {
     if (!events || events.length === 0) {
-        return <p>Geen aankomende wedstrijden gevonden.</p>;
+        return (
+            <article>
+                <p>Geen aankomende wedstrijden gevonden.</p>
+            </article>
+        );
     }
 
     return (
-        <div className="eventList">
+        <section className="eventList">
             {events.map((event) => {
-                const [homeTeamName, awayTeamName] = event.strEvent.split(" vs ");
+                const teams = event.strEvent.split(" vs ");
+                const homeTeamName = teams[0];
+                const awayTeamName = teams[1];
 
                 return (
-                    <div key={event.idEvent}>
-                        <div className="competitionRow">
+                    <article key={event.idEvent} className="eventContainer">
+                        <header className="competitionRow">
                             <div className="competitionLeft">
                                 {event.strLeagueBadge && (
                                     <img
                                         src={event.strLeagueBadge}
-                                        alt="League badge"
+                                        alt=""
                                         className="leagueBadge"
                                     />
                                 )}
                                 <span>{event.strLeague}</span>
                             </div>
-                            <span className="eventDate me-2">
+                            <time className="eventDate" dateTime={event.dateEvent}>
                                 {new Date(event.dateEvent).toLocaleDateString('nl-NL')}
-                            </span>
-                        </div>
+                            </time>
+                        </header>
+
                         <div className="eventCard">
                             <div className="eventLeft">
                                 <div className="teamRow">
                                     <img
                                         src={event.strHomeTeamBadge}
-                                        alt="Home Team Badge"
+                                        alt=""
                                         className="teamLogo"
                                     />
-                                    <span className="teamName text-start">{homeTeamName}</span>
+                                    <span className="teamName">{homeTeamName}</span>
                                     {event.intHomeScore !== null && (
                                         <span className="teamScore">{event.intHomeScore}</span>
                                     )}
@@ -44,24 +51,24 @@ function UpcomingEvents({ events }) {
                                 <div className="teamRow">
                                     <img
                                         src={event.strAwayTeamBadge}
-                                        alt="Away Team Badge"
+                                        alt=""
                                         className="teamLogo"
                                     />
-                                    <span className="teamName text-start">{awayTeamName}</span>
+                                    <span className="teamName">{awayTeamName}</span>
                                     {event.intAwayScore !== null && (
                                         <span className="teamScore">{event.intAwayScore}</span>
                                     )}
                                 </div>
-                                <p className="stadium text-start">{event.strVenue}</p>
+                                <address className="stadium">{event.strVenue}</address>
                             </div>
                             <div className="eventRight">
-                                <p className="eventTime">{event.strTime?.slice(0, 5)}</p>
+                                <time className="eventTime">{event.strTime?.slice(0, 5)}</time>
                             </div>
                         </div>
-                    </div>
+                    </article>
                 );
             })}
-        </div>
+        </section>
     );
 }
 
