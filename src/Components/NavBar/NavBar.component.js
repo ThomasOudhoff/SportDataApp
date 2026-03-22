@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./NavBar.component.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, NavLink } from "react-router-dom";
+import { useAuth } from "../../Contexts/AuthContext";
 
 const NavBarComponent = () => {
     const [dateTime, setDateTime] = useState("");
     const navigate = useNavigate();
-    const isAuthenticated = !!localStorage.getItem("JWT");
+    const { user, logout } = useAuth();
+
     const handleLogout = () => {
-        localStorage.removeItem("JWT");
+        logout();
         navigate("/auth/login");
     };
 
@@ -16,8 +18,7 @@ const NavBarComponent = () => {
             const now = new Date();
             const options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
             const date = now.toLocaleDateString("nl-NL", options);
-            const time = now.getHours() + ":" + now.getMinutes().toString().padStart(2, "0");
-
+            const time = now.getHours().toString().padStart(2, "0") + ":" + now.getMinutes().toString().padStart(2, "0");
             setDateTime(`${date} - ${time}`);
         };
 
@@ -27,23 +28,30 @@ const NavBarComponent = () => {
     }, []);
 
     return (
-        <div className="navbar">
-            <div className="datetime">{dateTime}</div>
+        <nav className="navbar">
+            <div className="datetime">
+                <time>{dateTime}</time>
+            </div>
             <div className="nav-links">
-                <Link to="/">Home</Link>
-                <Link to="/favorites">My Teams</Link>
-                {!isAuthenticated ? (
-                    <Link to="/auth/login">Login</Link>
+                <NavLink to="/" className={({ isActive }) => isActive ? "active-link" : ""}>
+                    Home
+                </NavLink>
+                <NavLink to="/favorites" className={({ isActive }) => isActive ? "active-link" : ""}>
+                    My Teams
+                </NavLink>
+                {!user ? (
+                    <NavLink to="/auth/login" className={({ isActive }) => isActive ? "active-link" : ""}>
+                        Login
+                    </NavLink>
                 ) : (
-                    <span className="logout-link" onClick={handleLogout}>
+                    <button type="button" className="logout-button" onClick={handleLogout}>
                         Log uit
-                    </span>
+                    </button>
                 )}
             </div>
-        </div>
+        </nav>
     );
 };
 
 export default NavBarComponent;
-
 

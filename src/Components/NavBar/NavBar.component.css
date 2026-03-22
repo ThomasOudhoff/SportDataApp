@@ -1,53 +1,57 @@
-/* Navigatiebalk styling */
 .navbar {
-    background-color: var(--green); /* Groene achtergrondkleur */
-    display: flex; /* Flexbox voor horizontale layout */
-    justify-content: space-between; /* Verdeel ruimte tussen links en datum/tijd */
-    align-items: center; /* Verticaal centreren van inhoud */
-    margin-bottom: 20px; /* Ruimte onder de navigatiebalk */
-    color: #000; /* Tekstkleur voor de inhoud van de navbar */
+    background-color: var(--green);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    margin-bottom: 20px;
+    color: var(--dark-grey);
+    height: 70px;
 }
 
-/* Datum/tijd styling in de navbar */
-.navbar .datetime {
-    font-size: 16px; /* Lettergrootte van de datum/tijd */
+.datetime {
+    font-size: 0.9rem;
+    font-weight: 600;
 }
 
-/* Navigatielinks als blokken weergegeven */
-.navbar .nav-links a {
-    display: inline-block; /* Gedraagt zich als blok zodat padding/randen werken */
-    padding: 8px 12px; /* Binnenruimte rondom de linktekst */
-    border: var(--dark-grey); /* Randkleur via CSS-variabele */
-    border-radius: 8px; /* Afgeronde hoeken voor een zachter uiterlijk */
-    background-color: var(--dark-grey); /* Achtergrondkleur van de link */
-    color: var(--green); /* Tekstkleur van de link */
-    text-decoration: none; /* Geen onderstreping */
-    transition: background-color 0.2s ease-in-out, border-color 0.2s; /* Soepele overgang bij hover */
-    margin: 6px; /* Buitenruimte tussen links */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-/* Hover-effect voor navigatielinks */
-.navbar .nav-links a:hover {
-    background-color: #e0e0e0; /* Lichtere achtergrond bij hover */
-    border-color: #999; /* Donkerdere rand bij hover */
+.nav-links a, .logout-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: var(--dark-grey);
+    color: var(--green);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
 }
 
-/* Styling van de logout-link */
-.logout-link {
-    display: inline-block; /* Blokvormig gedrag */
-    border: var(--dark-grey); /* Randkleur via CSS-variabele */
-    border-radius: 8px; /* Afgeronde hoeken */
-    background-color: var(--dark-grey); /* Achtergrondkleur */
-    color: var(--green); /* Tekstkleur */
-    margin: 6px; /* Ruimte rondom de link */
-    padding: 8px 12px; /* Binnenruimte voor klikvlak */
-    cursor: pointer; /* Cursor wordt een handje bij hover */
-    text-decoration: none; /* Geen onderstreping */
+.nav-links a:hover, .logout-button:hover {
+    background-color: #333;
 }
 
-/* Hover-effect voor logout-link */
-.logout-link:hover {
-    color: var(--green); /* Tekstkleur blijft groen bij hover */
+.nav-links a.active-link {
+    background-color: #000;
+    color: #fff;
 }
 
-
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+        gap: 10px;
+    }
+}
