@@ -25,25 +25,18 @@ function Login() {
                 {
                     headers: {
                         "novi-education-project-id": 'e9857dea-c29c-44bc-8429-8451091f8df7',
-                        "Content-Type": "application/json",
-                        "Accept": "application/json"
+                        "Content-Type": "application/json"
                     }
                 }
             );
 
             if (response.status === 200) {
-                const { token, user } = response.data;
-                login(token, user.email);
+                const { token, email: userEmail } = response.data;
+                login(token, userEmail);
                 navigate('/');
             }
         } catch (err) {
-            if (err.response && err.response.status === 401) {
-                setError("Onjuiste inloggegevens. Controleer je e-mail en wachtwoord.");
-            } else if (err.response && err.response.status === 429) {
-                setError("Te veel inlogpogingen. Probeer het over een minuutje opnieuw.");
-            } else {
-                setError("Fout bij verbinden met de server. Probeer het later nog eens.");
-            }
+            setError("Onjuiste gegevens.");
         } finally {
             setLoading(false);
         }
@@ -51,39 +44,27 @@ function Login() {
 
     return (
         <article className="login_window">
-            <form onSubmit={handleSubmit} className="search-form">
+            <form onSubmit={handleSubmit}>
                 <header>
                     <h2>Inloggen</h2>
                 </header>
 
-                {error && <p className="error-message" style={{ color: 'red' }}>{error}</p>}
+                {error && <p className="error-message">{error}</p>}
 
-                <section>
-                    <div>
+                <section className="input-group">
+                    <div className="input-field">
                         <label htmlFor="email">E-mail:</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            required
-                            disabled={loading}
-                        />
+                        <input type="email" id="email" name="email" required disabled={loading} />
                     </div>
-                    <div>
+                    <div className="input-field">
                         <label htmlFor="password">Wachtwoord:</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            required
-                            disabled={loading}
-                        />
+                        <input type="password" id="password" name="password" required disabled={loading} />
                     </div>
                 </section>
 
                 <footer>
                     <button type="submit" disabled={loading}>
-                        {loading ? 'Bezig met inloggen...' : 'Login'}
+                        {loading ? 'Bezig...' : 'Login'}
                     </button>
                 </footer>
             </form>

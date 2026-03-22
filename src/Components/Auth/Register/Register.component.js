@@ -15,8 +15,8 @@ const Register = () => {
         setLoading(true);
 
         const username = e.target.username.value;
-        const password = e.target.password.value;
         const email = e.target.email.value;
+        const password = e.target.password.value;
         const confirmEmail = e.target.confirmEmail.value;
 
         if (email !== confirmEmail) {
@@ -26,51 +26,26 @@ const Register = () => {
         }
 
         try {
-            const response = await axios.post(
+            await axios.post(
                 'https://novi-backend-api-wgsgz.ondigitalocean.app/api/users',
+                { username, email, password, role: ["user"] },
                 {
-                    username,
-                    email,
-                    password,
-                    role: ["user"]
-                },
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'novi-education-project-id': 'e9857dea-c29c-44bc-8429-8451091f8df7'
-                    }
+                    headers: { 'novi-education-project-id': 'e9857dea-c29c-44bc-8429-8451091f8df7' }
                 }
             );
 
-            if (response.status === 201 || response.status === 200) {
-                try {
-                    const loginResponse = await axios.post(
-                        'https://novi-backend-api-wgsgz.ondigitalocean.app/api/login',
-                        { email, password },
-                        {
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'novi-education-project-id': 'e9857dea-c29c-44bc-8429-8451091f8df7'
-                            }
-                        }
-                    );
-
-                    if (loginResponse.status === 200) {
-                        login(loginResponse.data.token, loginResponse.data.user.email);
-                        navigate("/");
-                    }
-                } catch (loginErr) {
-                    navigate("/auth/login");
+            const loginRes = await axios.post(
+                'https://novi-backend-api-wgsgz.ondigitalocean.app/api/login',
+                { email, password },
+                {
+                    headers: { 'novi-education-project-id': 'e9857dea-c29c-44bc-8429-8451091f8df7' }
                 }
-            }
+            );
+
+            login(loginRes.data.token, loginRes.data.email);
+            navigate("/");
         } catch (err) {
-            if (err.response && err.response.status === 409) {
-                setError("E-mailadres of gebruikersnaam is al in gebruik.");
-            } else if (err.response && err.response.status === 400) {
-                setError("Ongeldige gegevens. Controleer of je wachtwoord lang genoeg is.");
-            } else {
-                setError("Registratie mislukt. Probeer het later opnieuw.");
-            }
+            setError("Registratie mislukt.");
         } finally {
             setLoading(false);
         }
@@ -78,59 +53,35 @@ const Register = () => {
 
     return (
         <article className="login_window">
-            <form onSubmit={handleRegister} className="search-form">
+            <form onSubmit={handleRegister} className="login-form">
                 <header>
                     <h2>Registreren</h2>
                 </header>
 
-                {error && <p className="error-message" style={{ color: 'red' }}>{error}</p>}
+                {error && <p className="error-message">{error}</p>}
 
-                <section>
-                    <div>
+                <section className="input-group">
+                    <div className="input-field">
                         <label htmlFor="username">Gebruikersnaam:</label>
-                        <input
-                            type="text"
-                            id="username"
-                            name="username"
-                            required
-                            disabled={loading}
-                        />
+                        <input type="text" id="username" name="username" required disabled={loading} />
                     </div>
-                    <div>
+                    <div className="input-field">
                         <label htmlFor="email">E-mail:</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            required
-                            disabled={loading}
-                        />
+                        <input type="email" id="email" name="email" required disabled={loading} />
                     </div>
-                    <div>
+                    <div className="input-field">
                         <label htmlFor="confirmEmail">Bevestig E-mail:</label>
-                        <input
-                            type="email"
-                            id="confirmEmail"
-                            name="confirmEmail"
-                            required
-                            disabled={loading}
-                        />
+                        <input type="email" id="confirmEmail" name="confirmEmail" required disabled={loading} />
                     </div>
-                    <div>
+                    <div className="input-field">
                         <label htmlFor="password">Wachtwoord:</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            required
-                            disabled={loading}
-                        />
+                        <input type="password" id="password" name="password" required disabled={loading} />
                     </div>
                 </section>
 
                 <footer>
-                    <button type="submit" disabled={loading}>
-                        {loading ? 'Account aanmaken...' : 'Account aanmaken'}
+                    <button type="submit" className="main-button" disabled={loading}>
+                        Account aanmaken
                     </button>
                 </footer>
             </form>
@@ -139,8 +90,8 @@ const Register = () => {
                 <p>Heb je al een account?</p>
                 <button
                     type="button"
+                    className="secondary-button"
                     onClick={() => navigate("/auth/login")}
-                    disabled={loading}
                 >
                     Terug naar login
                 </button>
