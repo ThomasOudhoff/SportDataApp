@@ -18,11 +18,13 @@
   ],
   "users": [
     {
+      "id": 1,
       "email": "gebruiker2025@hotmail.com",
       "password": "test1234",
       "roles": ["user"]
     },
     {
+      "id": 2,
       "email": "fan2025@hotmail.com",
       "password": "voetbal!",
       "roles": ["user"]

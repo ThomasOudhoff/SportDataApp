@@ -53,7 +53,10 @@ const Register = () => {
                 }
             );
 
-            const { token, email: userEmail, id: userId } = loginRes.data;
+            const token = loginRes.data.token || loginRes.data.accessToken;
+            const userEmail = loginRes.data.email;
+            const userId = loginRes.data.id !== undefined ? loginRes.data.id : 0;
+
             login(token, userEmail, userId);
             navigate("/");
         } catch (err) {
@@ -75,19 +78,19 @@ const Register = () => {
                 <section className="input-group">
                     <div className="input-field">
                         <label htmlFor="username">Gebruikersnaam:</label>
-                        <input type="text" id="username" name="username" required disabled={loading} />
+                        <input type="text" id="username" name="username" required disabled={loading} autoComplete="username" />
                     </div>
                     <div className="input-field">
                         <label htmlFor="email">E-mail:</label>
-                        <input type="email" id="email" name="email" required disabled={loading} />
+                        <input type="email" id="email" name="email" required disabled={loading} autoComplete="email" />
                     </div>
                     <div className="input-field">
                         <label htmlFor="confirmEmail">Bevestig E-mail:</label>
-                        <input type="email" id="confirmEmail" name="confirmEmail" required disabled={loading} />
+                        <input type="email" id="confirmEmail" name="confirmEmail" required disabled={loading} autoComplete="email" />
                     </div>
                     <div className="input-field">
                         <label htmlFor="password">Wachtwoord:</label>
-                        <input type="password" id="password" name="password" required disabled={loading} />
+                        <input type="password" id="password" name="password" required disabled={loading} autoComplete="new-password" />
                     </div>
                 </section>
 
