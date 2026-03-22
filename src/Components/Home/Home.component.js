@@ -35,7 +35,7 @@ function HomeComponent() {
                 if (err.response && err.response.status === 429) {
                     setError("API limiet bereikt. Probeer het over een minuutje weer.");
                 } else {
-                    setError("Er ging iets mis bij het ophalen van de competities.");
+                    setError("Er ging iets mis bij het ophale van de competities.");
                 }
             } finally {
                 setLoading(false);

@@ -21,7 +21,7 @@
     flex: 1;
     background-color: var(--green);
     padding: 1em;
-    border-radius: 10px;
+    border-radius: 11px;
     display: flex;
     flex-direction: column;
     height: 100%;
