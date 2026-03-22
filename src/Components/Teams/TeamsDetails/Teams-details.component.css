@@ -1,45 +1,38 @@
-/* Algemene achtergrondkleur voor de hele pagina */
 body {
     background-color: var(--dark-grey);
 }
 
-/* Buitenste container met flex layout */
 .flexContainerOut {
     display: flex;
-    flex-wrap: wrap; /* Laat inhoud doorlopen op kleinere schermen */
+    flex-wrap: wrap;
     gap: 20px;
     padding: 20px;
 }
 
-/* Beide zijpanelen: teaminfo en wedstrijden */
 .leftBlock,
 .rightBlock {
-    flex: 1; /* Gelijke breedte */
+    flex: 1;
     background-color: var(--green);
     padding: 1em;
     border-radius: 10px;
 }
 
-/* Teaminformatie links */
 .info {
-    float: left; /* Zorgt dat tekst naast afbeelding komt */
+    float: left;
     width: 200px;
     margin-right: 20px;
 }
 
-/* Beschrijving van team */
 .desc {
     font-size: 12px;
 }
 
-/* Clear fix om float op te vangen */
 .leftBlock::after {
     content: "";
     display: block;
     clear: both;
 }
 
-/* Extra teaminformatie onderin (sociale links) */
 .additionalInfo {
     display: flex;
     justify-content: center;
@@ -48,7 +41,6 @@ body {
     padding-top: 20px;
 }
 
-/* Lijst van wedstrijden */
 .eventList {
     display: flex;
     flex-direction: column;
@@ -60,7 +52,6 @@ body {
     scrollbar-width: thin;
 }
 
-/* Scrollbar voor WebKit */
 .eventList::-webkit-scrollbar {
     width: 6px;
 }
@@ -70,7 +61,6 @@ body {
     border-radius: 3px;
 }
 
-/* Kaart met wedstrijdgegevens */
 .eventCard {
     display: flex;
     justify-content: space-between;
@@ -83,40 +73,34 @@ body {
     transition: 0.2s ease-in-out transform;
 }
 
-/* Linkerkant van de kaart: teams en stadion */
 .eventLeft {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-/* Rij met teamlogo, naam en score */
 .teamRow {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-/* Teamlogo */
 .teamLogo {
     width: 20px;
     height: auto;
 }
 
-/* Teamnaam */
 .teamName {
     font-weight: bold;
     font-size: 0.9rem;
 }
 
-/* Stadionnaam */
 .stadium {
     font-size: 0.8rem;
     margin-top: 5px;
     color: #333;
 }
 
-/* Rechterzijde met datum en tijd */
 .eventRight {
     text-align: right;
     display: flex;
@@ -125,18 +109,15 @@ body {
     font-size: 0.85rem;
 }
 
-/* Datum van event */
 .eventDate {
     font-weight: bold;
     white-space: nowrap;
 }
 
-/* Tijdstip van event */
 .eventTime {
     color: #222;
 }
 
-/* Responsive aanpassingen voor kleinere schermen */
 @media (max-width: 768px) {
     .flexContainerOut {
         flex-direction: column;
@@ -144,7 +125,7 @@ body {
 
     .leftBlock,
     .rightBlock {
-        flex: 1 1 100%; /* Volledige breedte op mobiel */
+        flex: 1 1 100%;
     }
 
     .eventCard {
@@ -161,7 +142,6 @@ body {
     }
 }
 
-/* Rij met competitie-info bovenaan een wedstrijdblok */
 .competitionRow {
     display: flex;
     justify-content: space-between;
@@ -175,20 +155,17 @@ body {
     border-top-right-radius: 8px;
 }
 
-/* Linkerkant met competitiebadge en naam */
 .competitionLeft {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-/* Competitielogo */
 .leagueBadge {
     width: 20px;
     height: auto;
 }
 
-/* Rij met teamtitel en score */
 .teamHeader {
     display: flex;
     align-items: center;
@@ -196,11 +173,11 @@ body {
     gap: 10px;
 }
 
-/* Scrollbare rechterkolom */
 .medium-scroll {
     max-height: 500px;
     overflow-y: scroll;
 }
+
 .back-button {
     margin-bottom: 20px;
     margin-top: 60px;
