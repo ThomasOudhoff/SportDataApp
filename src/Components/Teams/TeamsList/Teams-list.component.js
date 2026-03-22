@@ -81,7 +81,7 @@ function TeamsList() {
                                     e.stopPropagation();
                                     toggleFavorite(team.id);
                                 }}
-                                aria-label={favorites.includes(team.id) ? "Verwijder uit favorieten" : "Voeg toe aan favorieten"}
+                                aria-label={favorites && favorites.includes(String(team.id)) ? "Verwijder uit favorieten" : "Voeg toe aan favorieten"}
                             >
                                 <i className={`fas fa-star favoriteStar ${favorites && favorites.includes(team.id) ? 'active' : ''}`}></i>
                             </button>

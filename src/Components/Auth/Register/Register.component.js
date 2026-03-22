@@ -28,9 +28,17 @@ const Register = () => {
         try {
             await axios.post(
                 'https://novi-backend-api-wgsgz.ondigitalocean.app/api/users',
-                { username, email, password, role: ["user"] },
                 {
-                    headers: { 'novi-education-project-id': 'e9857dea-c29c-44bc-8429-8451091f8df7' }
+                    username,
+                    email,
+                    password,
+                    role: ["user"]
+                },
+                {
+                    headers: {
+                        'novi-education-project-id': 'e9857dea-c29c-44bc-8429-8451091f8df7',
+                        'Content-Type': 'application/json'
+                    }
                 }
             );
 
@@ -38,11 +46,15 @@ const Register = () => {
                 'https://novi-backend-api-wgsgz.ondigitalocean.app/api/login',
                 { email, password },
                 {
-                    headers: { 'novi-education-project-id': 'e9857dea-c29c-44bc-8429-8451091f8df7' }
+                    headers: {
+                        'novi-education-project-id': 'e9857dea-c29c-44bc-8429-8451091f8df7',
+                        'Content-Type': 'application/json'
+                    }
                 }
             );
 
-            login(loginRes.data.token, loginRes.data.email);
+            const { token, email: userEmail, id: userId } = loginRes.data;
+            login(token, userEmail, userId);
             navigate("/");
         } catch (err) {
             setError("Registratie mislukt.");

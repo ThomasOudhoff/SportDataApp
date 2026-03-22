@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
                     setUser({
                         token: token,
                         email: savedEmail,
-                        id: savedId
+                        id: Number(savedId)
                     });
 
                     const response = await axios.get('https://novi-backend-api-wgsgz.ondigitalocean.app/api/teams', {
@@ -51,12 +51,12 @@ export const AuthProvider = ({ children }) => {
     function login(token, email, userId) {
         localStorage.setItem('token', token);
         localStorage.setItem('user_email', email);
-        localStorage.setItem('user_id', userId);
+        localStorage.setItem('user_id', String(userId));
 
         setUser({
             token: token,
             email: email,
-            id: userId
+            id: Number(userId)
         });
 
         axios.get('https://novi-backend-api-wgsgz.ondigitalocean.app/api/teams', {
@@ -81,6 +81,7 @@ export const AuthProvider = ({ children }) => {
         setError(null);
         const isFavorite = favorites.includes(String(teamId));
         const token = localStorage.getItem('token');
+        const userId = Number(localStorage.getItem('user_id'));
 
         try {
             if (isFavorite) {
@@ -99,7 +100,8 @@ export const AuthProvider = ({ children }) => {
             } else {
                 await axios.post('https://novi-backend-api-wgsgz.ondigitalocean.app/api/teams',
                     {
-                        teamId: String(teamId)
+                        teamId: Number(teamId),
+                        userId: userId
                     },
                     {
                         headers: getNoviHeaders(token)

@@ -31,8 +31,11 @@ function Login() {
             );
 
             if (response.status === 200) {
-                const { token, email: userEmail } = response.data;
-                login(token, userEmail);
+                const token = response.data.token || response.data.accessToken;
+                const userEmail = response.data.email;
+                const userId = response.data.id !== undefined ? response.data.id : 0;
+
+                login(token, userEmail, userId);
                 navigate('/');
             }
         } catch (err) {
