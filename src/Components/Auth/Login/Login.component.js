@@ -1,73 +1,105 @@
-import './Login.component.css';
+import React, { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../Contexts/AuthContext';
-import React, { useState } from 'react';
-import Button from '../../ComponentHelpers/Button/Button.component';
+import './Login.component.css';
 
-const Login = () => {
-    const navigate = useNavigate();
-    const { login } = useAuth();
+function Login() {
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+    const { login } = useAuth();
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const username = e.target.username.value;
+        setError('');
+        setLoading(true);
+
+        const email = e.target.email.value;
         const password = e.target.password.value;
 
-        const baseUrl = 'https://api.datavortex.nl/sportdataapp';
-
         try {
-            const response = await fetch(`${baseUrl}/users/authenticate`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Api-Key': process.env.REACT_APP_API_KEY
-                },
-                body: JSON.stringify({ username, password }),
-            });
+            const response = await axios.post(
+                'https://novi-backend-api-wgsgz.ondigitalocean.app/api/login',
+                { email, password },
+                {
+                    headers: {
+                        "novi-education-project-id": 'e9857dea-c29c-44bc-8429-8451091f8df7',
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    }
+                }
+            );
 
-            let data = {};
-            try {
-                data = await response.json();
-            } catch (err) {}
-
-            if (response.ok) {
-                login(data.jwt);
+            if (response.status === 200) {
+                const { token, user } = response.data;
+                login(token, user.email);
                 navigate('/');
-            } else if (response.status === 401 || response.status === 403) {
-                setError("Gebruikersnaam of wachtwoord is onjuist.");
-            } else {
-                setError(data.message || "Er is iets misgegaan. Probeer het opnieuw.");
             }
-        } catch (error) {
-            setError("Fout bij verbinden met de server. Probeer het later opnieuw.");
+        } catch (err) {
+            if (err.response && err.response.status === 401) {
+                setError("Onjuiste inloggegevens. Controleer je e-mail en wachtwoord.");
+            } else if (err.response && err.response.status === 429) {
+                setError("Te veel inlogpogingen. Probeer het over een minuutje opnieuw.");
+            } else {
+                setError("Fout bij verbinden met de server. Probeer het later nog eens.");
+            }
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <div className="login_window">
-            {error && <p className="text-red">{error}</p>}
-            <form className="search-form" onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="username">Username:</label>
-                    <input type="text" id="username" name="username" required />
-                </div>
-                <div>
-                    <label htmlFor="password">Password:</label>
-                    <input type="password" id="password" name="password" required />
-                </div>
-                <Button clickButton={() => {}} text="Login" type="submit" />
+        <article className="login_window">
+            <form onSubmit={handleSubmit} className="search-form">
+                <header>
+                    <h2>Inloggen</h2>
+                </header>
+
+                {error && <p className="error-message" style={{ color: 'red' }}>{error}</p>}
+
+                <section>
+                    <div>
+                        <label htmlFor="email">E-mail:</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            required
+                            disabled={loading}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="password">Wachtwoord:</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            required
+                            disabled={loading}
+                        />
+                    </div>
+                </section>
+
+                <footer>
+                    <button type="submit" disabled={loading}>
+                        {loading ? 'Bezig met inloggen...' : 'Login'}
+                    </button>
+                </footer>
             </form>
-            <div className="register-link">
+
+            <nav className="register-link">
                 <p>Nog geen account?</p>
-                <button type="button" onClick={() => navigate('/auth/register')}>
+                <button
+                    type="button"
+                    onClick={() => navigate("/auth/register")}
+                    disabled={loading}
+                >
                     Registreren
                 </button>
-            </div>
-        </div>
+            </nav>
+        </article>
     );
-};
+}
 
 export default Login;
-
-

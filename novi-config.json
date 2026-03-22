@@ -1,0 +1,34 @@
+{
+  "collections": [
+    {
+      "name": "teams",
+      "fields": [
+        { "name": "id", "type": "number", "required": true },
+        { "name": "teamId", "type": "number", "required": true },
+        { "name": "userId", "type": "reference:users", "required": true }
+      ],
+      "permissions": {
+        "GET": ["user"],
+        "POST": ["user"],
+        "PUT": ["user"],
+        "PATCH": ["user"],
+        "DELETE": ["user"]
+      }
+    }
+  ],
+  "users": [
+    {
+      "email": "gebruiker2025@hotmail.com",
+      "password": "test1234",
+      "roles": ["user"]
+    },
+    {
+      "email": "fan2025@hotmail.com",
+      "password": "voetbal!",
+      "roles": ["user"]
+    }
+  ],
+  "data": {
+    "teams": []
+  }
+}
