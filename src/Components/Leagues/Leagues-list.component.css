@@ -1,16 +1,46 @@
 .league_wrapper {
-    list-style: none; /* Verwijder standaard lijststijl */
-    padding-left: 0; /* Verwijder standaard padding */
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
 }
 
 .league_item {
-    margin-top: 2px; /* Ruimte boven het item */
-    margin-bottom: 2px; /* Ruimte onder het item */
-    padding: 2px 5px; /* Binnenruimte rondom de tekst */
-    transition: 0.1s linear all;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    color: var(--dark-grey);
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
+
+.league_wrapper li:nth-child(odd) .league_item {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.league_wrapper li:nth-child(even) .league_item {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
 .league_item:hover {
-    background-color: var(--dark-grey); /* Groene achtergrond bij hover */
-    color: var(--green); /* Donkergrijze tekstkleur bij hover */
-    cursor: pointer; /* Cursor verandert in een handje */
+    background-color: var(--dark-grey) !important;
+    color: var(--green);
+}
+
+.league_item.active {
+    background-color: var(--dark-grey) !important;
+    color: var(--green);
+    font-weight: bold;
+}
+
+.league_item:focus {
+    outline: none;
+}
+
+.no-results {
+    padding: 10px;
+    font-style: italic;
+    color: var(--dark-grey);
 }
