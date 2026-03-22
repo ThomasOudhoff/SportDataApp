@@ -5,7 +5,7 @@ import './SeasonSelect.component.css';
 export default function SeasonSelector({
                                            value,
                                            onChange,
-                                           yearsBack = 10,
+                                           yearsBack = 15,
                                            baseYear,
                                            startAtCurrent = true,
                                            id = "season",
@@ -18,7 +18,7 @@ export default function SeasonSelector({
 
     const options = useMemo(() => {
         const first = startAtCurrent ? currentYear : currentYear - 1;
-        const total = yearsBack + 1; // bv. 11 opties
+        const total = yearsBack + 1;
         return Array.from({ length: total }, (_, i) => {
             const start = first - i;
             const end = start + 1;

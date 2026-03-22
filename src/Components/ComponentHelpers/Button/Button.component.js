@@ -18,3 +18,5 @@ const Button = ({ clickButton, text, type = "button" }) => {
 
 export default Button;
 
+//niks aan gedaan
+
