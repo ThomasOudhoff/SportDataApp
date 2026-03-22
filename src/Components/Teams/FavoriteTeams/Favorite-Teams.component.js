@@ -1,44 +1,45 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
+import { useAuth } from "../../../Contexts/AuthContext";
 import "./Favorite-Teams.component.css";
+import axios from "axios";
 
 function FavoriteTeams() {
-    const [favoriteTeams, setFavoriteTeams] = useState([]);
+    const { favorites, toggleFavorite } = useAuth();
     const [results, setResults] = useState({});
     const [teamDetails, setTeamDetails] = useState({});
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        const storedFavorites = JSON.parse(localStorage.getItem("favoriteTeams")) || [];
-        setFavoriteTeams(storedFavorites);
-
-        const fetchData = async () => {
+        const fetchSportsDbData = async (teamIds) => {
             try {
-                const resultPromises = storedFavorites.map(async (teamId) => {
+                setError(null);
+                const resultPromises = teamIds.map(async (teamId) => {
                     try {
-                        const res = await fetch(`/api/v1/json/3/eventslast.php?id=${teamId}`);
-                        const data = await res.json();
-                        return { teamId, results: data.results || [] };
-                    } catch (error) {
+                        const res = await axios.get(`/api/v1/json/3/eventslast.php?id=${teamId}`);
+                        return { teamId, results: res.data.results || [] };
+                    } catch (err) {
                         return { teamId, results: [] };
                     }
                 });
 
-                const detailPromises = storedFavorites.map(async (teamId) => {
+                const detailPromises = teamIds.map(async (teamId) => {
                     try {
-                        const res = await fetch(`/api/v1/json/3/lookupteam.php?id=${teamId}`);
-                        const data = await res.json();
-                        const team = data.teams?.[0];
+                        const res = await axios.get(`/api/v1/json/3/lookupteam.php?id=${teamId}`);
+                        const team = res.data.teams?.[0];
                         return {
                             teamId,
                             details: team ? { name: team.strTeam, logo: team.strBadge } : null
                         };
-                    } catch (error) {
+                    } catch (err) {
                         return { teamId, details: null };
                     }
                 });
 
-                const resultResponses = await Promise.all(resultPromises);
-                const detailResponses = await Promise.all(detailPromises);
+                const [resultResponses, detailResponses] = await Promise.all([
+                    Promise.all(resultPromises),
+                    Promise.all(detailPromises)
+                ]);
 
                 const allResults = {};
                 const allDetails = {};
@@ -56,14 +57,18 @@ function FavoriteTeams() {
                 setResults(allResults);
                 setTeamDetails(allDetails);
             } catch (err) {
-                console.error(err);
+                if (err.response && err.response.status === 429) {
+                    setError("Te veel verzoeken. Wacht even een minuutje.");
+                } else {
+                    setError("Fout bij ophalen van favoriete teams.");
+                }
             }
         };
 
-        if (storedFavorites.length > 0) {
-            fetchData();
+        if (favorites && favorites.length > 0) {
+            fetchSportsDbData(favorites);
         }
-    }, []);
+    }, [favorites]);
 
     const getForm = (teamId) => {
         const matches = results[teamId] || [];
@@ -82,52 +87,37 @@ function FavoriteTeams() {
     };
 
     const handleRemoveFavorite = (teamId, teamName) => {
-        const confirm = window.confirm(`Weet je zeker dat je ${teamName} uit je favorieten wilt verwijderen?`);
+        const confirm = window.confirm(`Weet je zeker dat je ${teamName} wilt verwijderen?`);
         if (confirm) {
-            const updatedFavorites = favoriteTeams.filter(id => id !== teamId);
-            localStorage.setItem("favoriteTeams", JSON.stringify(updatedFavorites));
-            setFavoriteTeams(updatedFavorites);
+            toggleFavorite({ id: teamId });
         }
     };
 
+    if (error) return <section className="error-container"><p>{error}</p></section>;
+    if (!favorites || favorites.length === 0) return <section><p>Je hebt nog geen favoriete teams.</p></section>;
     return (
         <div className="pageLayout favorites-layout">
             <div className="leftPanel favorites-panel">
                 <h1>Mijn Favoriete Teams</h1>
                 <ul className="favorites-wrapper">
-                    {favoriteTeams.length === 0 ? (
-                        <p>
-                            Je hebt nog geen favoriete teams toegevoegd.{" "}
-                            <Link to="/">Ga naar de homepagina</Link> en kies vanuit je favoriete competitie je
-                            teams om te volgen.
-                        </p>
+                    {favorites.length === 0 ? (
+                        <p>Je hebt nog geen favoriete teams toegevoegd.</p>
                     ) : (
-                        favoriteTeams.map((teamId) => (
+                        favorites.map((teamId) => (
                             <li key={teamId} className="team-row">
                                 <div className="team-left">
-                                    <img
-                                        src={teamDetails[teamId]?.logo}
-                                        alt={teamDetails[teamId]?.name}
-                                        className="team-logo"
-                                    />
-                                    {teamDetails[teamId] === undefined ? (
-                                        <p>Kon team niet laden...</p>
-                                    ) : (
-                                        <Link to={`/teams/${teamId}`} className="team-name">
-                                            {teamDetails[teamId]?.name}
-                                        </Link>
-                                    )}
+                                    <img src={teamDetails[teamId]?.logo} alt="" className="team-logo" />
+                                    <Link to={`/teams/${teamId}`} className="team-name">
+                                        {teamDetails[teamId]?.name || "Laden..."}
+                                    </Link>
                                 </div>
                                 <div className="form">
-                                    {getForm(teamId).map((result, idx) => (
-                                        <span key={idx} className={`form-block ${result}`}>
-                                            {result}
-                                        </span>
+                                    {(getForm(teamId) || []).map((result, idx) => (
+                                        <span key={idx} className={`form-block ${result}`}>{result}</span>
                                     ))}
                                 </div>
                                 <i
-                                    className="fas fa-star favorite-star"
-                                    title="Verwijder uit favorieten"
+                                    className="fas fa-star favorite-star active"
                                     onClick={() => handleRemoveFavorite(teamId, teamDetails[teamId]?.name)}
                                 ></i>
                             </li>
@@ -140,7 +130,4 @@ function FavoriteTeams() {
 }
 
 export default FavoriteTeams;
-
-
-
 
