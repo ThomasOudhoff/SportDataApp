@@ -9,17 +9,37 @@
     color: var(--green);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
+.league-table th,
+.league-table td {
+    padding: 12px 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+    vertical-align: middle;
+}
+.league-table th:first-child,
+.league-table td:first-child {
+    width: 30px;
+    min-width: 30px;
+    padding-left: 15px;
+}
+.league-table th:nth-child(2),
+.league-table td:nth-child(2) {
+    text-align: left;
+    width: auto;
+}
+.league-table th:nth-child(n+3),
+.league-table td:nth-child(n+3) {
+    width: 45px;
+    min-width: 45px;
+}
 
 .league-table th {
     background-color: var(--dark-green);
     color: var(--dark-grey);
-    padding: 12px 16px;
-    text-align: left;
+    text-align: center;
 }
-
-.league-table td {
-    padding: 12px 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+.league-table th:nth-child(2) {
+    text-align: left;
 }
 
 .league-table tbody tr:nth-child(even) {
@@ -84,10 +104,4 @@
     background-color: var(--green);
     color: var(--dark-grey);
     font-weight: bold;
-}
-
-.error-message {
-    color: #ff4d4d;
-    font-weight: bold;
-    margin: 10px 0;
 }
